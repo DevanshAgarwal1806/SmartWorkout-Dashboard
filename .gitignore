@@ -1,0 +1,12 @@
+node_modules
+.env
+.env.*
+frontend/.env
+# Supabase keys
+src/supabaseClient.ts
+src\supabaseClient.ts
+# Python/venv
+__pycache__/
+*.pyc
+# VSCode
+.vscode/
