@@ -1,0 +1,91 @@
+.goals-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+.goals-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.goals-input {
+  flex: 1 1 180px;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+}
+.goals-add-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.goals-add-btn:disabled {
+  background: #a5b4fc;
+  cursor: not-allowed;
+}
+.goals-list-container {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 1rem;
+}
+.goals-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.goals-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f3f4f6;
+  transition: background 0.2s;
+}
+.goals-list-item.completed .goals-list-goal {
+  text-decoration: line-through;
+  color: #6b7280;
+}
+.goals-list-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.goals-list-goal {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.goals-list-date {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-left: 0.5rem;
+}
+.goals-delete-btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 1rem;
+  transition: color 0.2s;
+}
+.goals-delete-btn:disabled {
+  color: #fca5a5;
+  cursor: not-allowed;
+}
+.goals-error {
+  color: #ef4444;
+  margin-bottom: 1rem;
+}
+.goals-empty {
+  color: #64748b;
+  text-align: center;
+  padding: 2rem 0;
+}

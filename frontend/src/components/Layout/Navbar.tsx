@@ -1,0 +1,108 @@
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { 
+  Home, 
+  Dumbbell, 
+  BarChart3, 
+  Brain, 
+  User,
+  Menu,
+  X,
+  Calculator,
+  Flag
+} from 'lucide-react';
+import type { NavItem } from '../../types';
+import './Navbar.css';
+
+const Navbar: React.FC = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const navigation: NavItem[] = [
+    { name: 'Dashboard', href: '/', icon: Home },
+    { name: 'Workouts', href: '/workouts', icon: Dumbbell },
+    { name: 'Analytics', href: '/analytics', icon: BarChart3 },
+    { name: 'AI Coach', href: '/ai', icon: Brain },
+    { name: 'Weight & Calories', href: '/weight-calories', icon: Calculator },
+    { name: 'Personalized Workout', href: '/personalized-workout', icon: Dumbbell },
+    { name: 'Set Goals', href: '/goals', icon: Flag },
+    { name: 'Profile', href: '/profile', icon: User },
+  ];
+
+  return (
+    <nav className="navbar">
+      <div className="navbar-container">
+        <div className="navbar-content">
+          {/* Logo and brand */}
+          <div className="navbar-brand">
+            <div className="navbar-logo">
+              <Dumbbell className="navbar-logo-icon" />
+              <span className="navbar-logo-text">FitTrack</span>
+            </div>
+          </div>
+
+          {/* Desktop navigation */}
+          <div className="navbar-desktop">
+            {navigation.map((item) => {
+              const Icon = item.icon;
+              const isActive = currentPath === item.href;
+              
+              return (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`navbar-item ${isActive ? 'navbar-item-active' : ''}`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <Icon className="navbar-item-icon" />
+                  {item.name}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="navbar-mobile-toggle">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="navbar-toggle-button"
+            >
+              {isMobileMenuOpen ? (
+                <X className="navbar-toggle-icon" />
+              ) : (
+                <Menu className="navbar-toggle-icon" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile navigation menu */}
+        {isMobileMenuOpen && (
+          <div className="navbar-mobile-menu">
+            <div className="navbar-mobile-content">
+              {navigation.map((item) => {
+                const Icon = item.icon;
+                const isActive = currentPath === item.href;
+                
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={`navbar-mobile-item ${isActive ? 'navbar-mobile-item-active' : ''}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Icon className="navbar-mobile-item-icon" />
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

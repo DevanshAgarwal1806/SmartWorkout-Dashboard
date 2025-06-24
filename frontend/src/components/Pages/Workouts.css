@@ -1,0 +1,112 @@
+.workouts-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+.workouts-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.workouts-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+.workouts-log-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.workouts-log-btn:hover {
+  background: #1d4ed8;
+}
+.workouts-btn-icon {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+.workouts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.workouts-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f1f5f9;
+  border-radius: 7px;
+  padding: 14px 18px;
+  font-size: 1.08rem;
+  color: #334155;
+  box-shadow: 0 2px 8px rgba(30,41,59,0.04);
+  transition: box-shadow 0.18s, background 0.18s;
+}
+.workouts-item:hover {
+  background: #e0e7ef;
+  box-shadow: 0 4px 16px rgba(30,41,59,0.08);
+}
+.workouts-item-date {
+  min-width: 110px;
+  font-weight: 500;
+  color: #2563eb;
+}
+.workouts-item-type {
+  min-width: 120px;
+  font-weight: 500;
+  color: #0f172a;
+}
+.workouts-item-type-missing {
+  color: #64748b;
+  font-style: italic;
+}
+.workouts-item-duration {
+  min-width: 90px;
+  color: #334155;
+}
+.workouts-item-calories {
+  min-width: 90px;
+  color: #f59e42;
+  font-weight: 500;
+}
+.workouts-empty {
+  text-align: center;
+  color: #64748b;
+  margin-top: 32px;
+}
+.workouts-empty-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-bottom: 8px;
+  color: #cbd5e1;
+}
+.workouts-delete-btn {
+  background: #dc2626;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 6px 14px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: background 0.18s, box-shadow 0.18s;
+  box-shadow: 0 2px 8px rgba(220,38,38,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.workouts-delete-btn:hover {
+  background: #b91c1c;
+  box-shadow: 0 4px 16px rgba(220,38,38,0.16);
+}

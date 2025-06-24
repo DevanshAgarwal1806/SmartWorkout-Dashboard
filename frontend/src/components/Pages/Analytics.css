@@ -1,0 +1,128 @@
+.analytics-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.08);
+  max-width: 480px;
+  margin: 0 auto;
+}
+.wc-main-bg {
+  background: linear-gradient(120deg, #f0f4f8 0%, #e6fffa 100%);
+  min-height: 100vh;
+  padding-top: 36px;
+  padding-bottom: 36px;
+}
+.wc-info-box {
+  background: #f7fafc;
+  border-left: 5px solid #3182ce;
+  border-radius: 10px;
+  padding: 22px 28px 18px 28px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 12px rgba(44,130,201,0.07);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.wc-info-box h2 {
+  color: #2b6cb0;
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+.wc-info-box p {
+  color: #234e52;
+  font-size: 1.08rem;
+  margin: 0;
+}
+.wc-flex-responsive {
+  flex-wrap: wrap;
+  gap: 36px;
+  justify-content: center;
+}
+.wc-card-analytics {
+  min-width: 340px;
+  max-width: 600px;
+  margin: 0 8px 32px 8px;
+  box-shadow: 0 2px 16px rgba(44,130,201,0.09);
+  border: 1.5px solid #e2e8f0;
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px 24px 28px 24px;
+}
+.analytics-form label {
+  font-size: 1.04rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+.analytics-form input[type="file"],
+.analytics-form select {
+  margin-top: 0.25rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  font-size: 1rem;
+}
+.analytics-form button {
+  margin-top: 10px;
+  font-size: 1.08rem;
+  padding: 12px 0;
+  border-radius: 8px;
+  background: #3182ce;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.analytics-form button:disabled {
+  background: #a0aec0;
+  cursor: not-allowed;
+}
+.analytics-plot {
+  margin-top: 24px;
+  text-align: center;
+}
+.error-message {
+  color: #e53e3e;
+  background: #fff5f5;
+  border: 1px solid #fed7d7;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .analytics-form {
+    max-width: 99vw !important;
+    padding: 1rem 4vw !important;
+  }
+  .wc-card-analytics {
+    min-width: 0 !important;
+    max-width: 98vw !important;
+    width: 100% !important;
+    margin: 0 0 24px 0 !important;
+    padding: 18px 4vw 18px 4vw !important;
+  }
+  .wc-info-box {
+    max-width: 99vw !important;
+    padding: 16px 4vw 12px 4vw !important;
+  }
+}
+@media (max-width: 600px) {
+  .analytics-form label {
+    font-size: 0.98rem !important;
+  }
+  .analytics-form input[type="file"],
+  .analytics-form select {
+    font-size: 0.98rem !important;
+    padding: 6px 6px !important;
+  }
+  .analytics-form button {
+    font-size: 1rem !important;
+    padding: 10px 0 !important;
+  }
+}
