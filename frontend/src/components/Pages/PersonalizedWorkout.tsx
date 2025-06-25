@@ -250,7 +250,7 @@ const PersonalizedWorkout: React.FC<PersonalizedWorkoutProps> = ({ profile }) =>
           {planModal.plan && (
             <div className="pw-section">
               <div className="pw-plan-title" style={{fontSize:'1.25rem'}}>{planModal.plan.name}</div>
-              <pre style={{whiteSpace:'pre-wrap',fontSize:'1.08rem',background:'none',border:'none',margin:0}}>{planModal.plan.plan}</pre>
+              <pre className="pw-plan-preview">{planModal.plan.plan}</pre>
             </div>
           )}
         </Modal>
@@ -269,40 +269,40 @@ const PersonalizedWorkout: React.FC<PersonalizedWorkoutProps> = ({ profile }) =>
         <form onSubmit={handleSubmit} className="pw-form">
           <div className="pw-form-cols">
             <div className="pw-form-col">
-              <label>Current Weight (kg): <input name="current_weight" type="number" min="30" max="250" value={form.current_weight} onChange={handleChange} required readOnly={step === 1} disabled={step === 1} className={step === 1 ? 'pw-prefill-input' : ''} /></label>
-              <label>Target Weight (kg): <input name="target_weight" type="number" min="30" max="250" value={form.target_weight} onChange={handleChange} required /></label>
+              <label>Current Weight (kg): <input name="current_weight" type="number" min="30" max="250" value={form.current_weight} onChange={handleChange} required readOnly={step === 1} disabled={step === 1} className={`pw-form-input${step === 1 ? ' pw-prefill-input' : ''}`} /></label>
+              <label>Target Weight (kg): <input name="target_weight" type="number" min="30" max="250" value={form.target_weight} onChange={handleChange} required className="pw-form-input" /></label>
               <label>Gender:
-                <select name="gender" value={form.gender} onChange={handleChange} required disabled={step === 1} className={step === 1 ? 'pw-prefill-input' : ''}>
+                <select name="gender" value={form.gender} onChange={handleChange} required disabled={step === 1} className={`pw-form-input${step === 1 ? ' pw-prefill-input' : ''}`}> 
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
               </label>
-              <label>Age: <input name="age" type="number" min="10" max="100" value={form.age} onChange={handleChange} required readOnly={step === 1} disabled={step === 1} className={step === 1 ? 'pw-prefill-input' : ''} /></label>
-              <label>Target No. of Days: <input name="days" type="number" min="7" max="365" value={form.days} onChange={handleChange} required /></label>
-              <label>Time You Can Dedicate Each Day (mins): <input name="exercise_hours" type="number" min="10" max="180" value={form.exercise_hours} onChange={handleChange} required /></label>
+              <label>Age: <input name="age" type="number" min="10" max="100" value={form.age} onChange={handleChange} required readOnly={step === 1} disabled={step === 1} className={`pw-form-input${step === 1 ? ' pw-prefill-input' : ''}`} /></label>
+              <label>Target No. of Days: <input name="days" type="number" min="7" max="365" value={form.days} onChange={handleChange} required className="pw-form-input" /></label>
+              <label>Time You Can Dedicate Each Day (mins): <input name="exercise_hours" type="number" min="10" max="180" value={form.exercise_hours} onChange={handleChange} required className="pw-form-input" /></label>
               <label>Gym Access:
-                <select name="gym_access" value={form.gym_access} onChange={handleChange} required>
+                <select name="gym_access" value={form.gym_access} onChange={handleChange} required className="pw-form-input">
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
                 </select>
               </label>
             </div>
             <div className="pw-form-col">
-              <label>Workout Days per Week: <input name="days_per_week" type="number" min="1" max="7" value={form.days_per_week} onChange={handleChange} required /></label>
+              <label>Workout Days per Week: <input name="days_per_week" type="number" min="1" max="7" value={form.days_per_week} onChange={handleChange} required className="pw-form-input" /></label>
               <label>Preferred Workout Type:
-                <select name="workout_type" value={form.workout_type} onChange={handleChange} required>
+                <select name="workout_type" value={form.workout_type} onChange={handleChange} required className="pw-form-input">
                   <option value="">Select</option>
                   {workoutTypes.map(type => <option key={type} value={type}>{type}</option>)}
                 </select>
               </label>
               <label>Current Fitness Level:
-                <select name="fitness_level" value={form.fitness_level} onChange={handleChange} required>
+                <select name="fitness_level" value={form.fitness_level} onChange={handleChange} required className="pw-form-input">
                   <option value="">Select</option>
                   {fitnessLevels.map(level => <option key={level} value={level}>{level}</option>)}
                 </select>
               </label>
               <label>Limitations / Injuries (optional):
-                <textarea name="injuries" value={form.injuries} onChange={handleChange} rows={2} placeholder="e.g. knee pain, asthma, etc." style={{resize:'vertical'}} />
+                <textarea name="injuries" value={form.injuries} onChange={handleChange} rows={2} placeholder="e.g. knee pain, asthma, etc." style={{resize:'vertical'}} className="pw-form-input" />
               </label>
               <button className="pw-form-btn" type="submit" disabled={loading}>{loading ? 'Generating...' : 'Generate Plan'}</button>
             </div>

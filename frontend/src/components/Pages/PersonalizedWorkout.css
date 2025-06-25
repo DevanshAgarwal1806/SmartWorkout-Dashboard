@@ -52,24 +52,29 @@
   border: 1.5px solid #38bdf8;
   background: #181c24;
 }
-.pw-form-btn {
-  padding: 0.75rem 1.1rem;
-  border-radius: 0.75rem;
-  border: none;
-  background: linear-gradient(90deg, #38bdf8 0%, #2563eb 100%);
+.pw-form-btn, .pw-choice-btn {
+  background: linear-gradient(90deg, #2563eb 0%, #9333ea 100%);
   color: #fff;
-  font-weight: 700;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.1rem;
   font-size: 1.08rem;
+  font-weight: 700;
   cursor: pointer;
   margin-top: 0.5rem;
-  margin-right:10px;
+  margin-right: 10px;
   transition: background 0.2s, box-shadow 0.2s, color 0.2s;
-  box-shadow: 0 2px 8px 0 #38bdf844;
+  box-shadow: 0 2px 8px 0 #23283a33;
 }
-.pw-form-btn:hover {
-  background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
+.pw-form-btn:hover, .pw-choice-btn:hover {
+  background: linear-gradient(90deg, #9333ea 0%, #2563eb 100%);
   color: #fff;
-  box-shadow: 0 0 16px 2px #38bdf8;
+  box-shadow: 0 0 16px 2px #9333ea;
+}
+.pw-form-btn:disabled, .pw-choice-btn:disabled {
+  background: #23283a;
+  color: #b0b8c1;
+  cursor: not-allowed;
 }
 .pw-error-message {
   color: #dc2626;
@@ -158,11 +163,16 @@
   box-shadow: 0 8px 32px #38bdf822, 0 2px 8px #23283a44;
   padding: 2.2rem 1.5rem 1.5rem 1.5rem;
   min-width: 320px;
-  max-width: 95vw;
+  max-width: 98vw;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 1.5px solid #38bdf822;
+  color: #e5e7eb;
+  position: relative;
 }
 .pw-modal-close {
   position: absolute;
@@ -175,9 +185,31 @@
   font-weight: 700;
   cursor: pointer;
 }
+.pw-plan-preview, .pw-modal-content pre, .pw-section pre {
+  background: #181c24;
+  color: #e0e7eb;
+  border-radius: 0.7rem;
+  border: 1.5px solid #23283a;
+  padding: 1rem 1.2rem;
+  font-size: 1.08rem;
+  max-height: 320px;
+  overflow: auto;
+  margin-top: 0.7rem;
+  margin-bottom: 0.7rem;
+  box-shadow: 0 2px 8px #23283a33;
+}
 @media (max-width: 900px) {
   .pw-form-cols {
     flex-direction: column;
     gap: 1.2rem;
+  }
+}
+@media (max-width: 700px) {
+  .pw-modal-content {
+    min-width: 0;
+    width: 98vw;
+    max-width: 98vw;
+    border-radius: 0.8rem;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
   }
 }

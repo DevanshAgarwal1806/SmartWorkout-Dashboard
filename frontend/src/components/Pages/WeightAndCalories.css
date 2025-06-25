@@ -132,16 +132,13 @@
   -webkit-backdrop-filter: blur(6px);
 }
 .wc-modal-content {
-  background: #fff;
+  background: linear-gradient(135deg, #23283a 60%, #181c24 100%);
   border-radius: 12px;
   box-shadow: 0 4px 32px rgba(0,0,0,0.18);
   padding: 32px 28px 24px 28px;
   min-width: 320px;
   max-width: 95vw;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  animation: wc-modal-fadein 0.2s;
+  color: #e5e7eb;
 }
 .wc-modal-close {
   position: absolute;
@@ -418,22 +415,24 @@
   to { opacity: 1; transform: translateY(0); }
 }
 .wc-choice-card {
-  background: #f7fafc;
+  background: linear-gradient(135deg, #23283a 60%, #181c24 100%);
   border-radius: 12px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  box-shadow: 0 1px 6px #0004;
   padding: 32px 24px 28px 24px;
   margin: 32px auto 0 auto;
   max-width: 420px;
   text-align: center;
+  color: #e5e7eb;
+  border: 1.5px solid #23283a;
 }
 .wc-choice-card h2 {
   font-size: 1.3rem;
   font-weight: 600;
-  color: #2b6cb0;
+  color: #22d3ee;
   margin-bottom: 18px;
 }
 .wc-choice-card button {
-  background: #3182ce;
+  background: linear-gradient(90deg, #2563eb 0%, #9333ea 100%);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -443,9 +442,11 @@
   margin: 0 10px 0 0;
   cursor: pointer;
   transition: background 0.18s;
+  box-shadow: 0 2px 8px #23283a33;
 }
 .wc-choice-card button:disabled {
-  background: #b5c9e3;
+  background: #23283a;
+  color: #b0b8c1;
   cursor: not-allowed;
 }
 .wc-choice-card button:last-child {
