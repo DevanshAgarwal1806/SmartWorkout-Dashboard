@@ -240,8 +240,8 @@ const WeightAndCalories: React.FC<WeightAndCaloriesProps> = ({ profile }) => {
                     <li className="wc-predict-value-box">Carbs: <span>{wpResult.macros.carbs} g</span></li>
                   </ul>
                 </div>
-                <div className="wc-predict-calories">Daily Calories: <b>{wpResult.daily_calories} kcal</b></div>
-                <div className="wc-predict-tdee">TDEE: <b>{wpResult.tdee} kcal</b></div>
+                <div className="wc-predict-value-box">Daily Calories: <b>{wpResult.daily_calories} kcal</b></div>
+                <div className="wc-predict-value-box">TDEE: <b>{wpResult.tdee} kcal</b></div>
               </div>
             )}
           </Modal>
