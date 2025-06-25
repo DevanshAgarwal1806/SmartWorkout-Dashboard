@@ -21,7 +21,7 @@ from io import BytesIO
 from dotenv import load_dotenv
 
 load_dotenv()
-
+print("OpenRouter key loaded:", os.getenv("OPENROUTER_API_KEY"))
 app = FastAPI(title="FitTrack API", version="1.0.0")
 
 # CORS middleware
@@ -117,7 +117,7 @@ def generate_with_openrouter(prompt: str) -> str:
     }
     
     data = {
-        "model": "mistralai/mistral-7b-instruct",
+        "model": "mistralai/mistral-small-3.2-24b-instruct:free",
         "messages": [
             {"role": "system", "content": "You are a helpful and motivating fitness coach."},
             {"role": "user", "content": prompt}
