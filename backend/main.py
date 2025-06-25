@@ -10,7 +10,6 @@ import json
 import os
 from datetime import datetime, date
 import requests
-from geopy.distance import geodesic
 import io
 import base64
 import matplotlib

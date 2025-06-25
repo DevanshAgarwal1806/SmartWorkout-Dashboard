@@ -458,3 +458,30 @@
   border: 1.5px solid #a0aec0 !important;
   cursor: not-allowed !important;
 }
+.wc-predict-macros-box {
+  background: #23283a;
+  border-radius: 0.7rem;
+  border: 1.5px solid #22d3ee;
+  padding: 1.1rem 1.2rem;
+  margin: 1.1rem 0 0.7rem 0;
+  color: #e0e7eb;
+  box-shadow: 0 2px 8px #23283a33;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.wc-predict-macros-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.wc-predict-macros-box li {
+  font-size: 1.08rem;
+  color: #38bdf8;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+.wc-predict-macros-box li span {
+  color: #e0e7eb;
+  font-weight: 400;
+}

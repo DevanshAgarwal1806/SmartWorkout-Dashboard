@@ -233,11 +233,13 @@ const WeightAndCalories: React.FC<WeightAndCaloriesProps> = ({ profile }) => {
                   <div><span>6 Months:</span> <b>{wpResult.predictions["6_months"]} kg</b></div>
                 </div>
                 <div className="wc-weekly-heading" style={{marginTop: 18}}>RECOMMENDED MACROS (PER DAY)</div>
-                <ul className="wc-macros-list wc-weekly-list">
-                  <li>Protein: <b>{wpResult.macros.protein} g</b></li>
-                  <li>Fat: <b>{wpResult.macros.fat} g</b></li>
-                  <li>Carbs: <b>{wpResult.macros.carbs} g</b></li>
-                </ul>
+                <div className="wc-predict-macros-box">
+                  <ul>
+                    <li>Protein: <span>{wpResult.macros.protein} g</span></li>
+                    <li>Fat: <span>{wpResult.macros.fat} g</span></li>
+                    <li>Carbs: <span>{wpResult.macros.carbs} g</span></li>
+                  </ul>
+                </div>
                 <div className="wc-predict-calories">Daily Calories: <b>{wpResult.daily_calories} kcal</b></div>
                 <div className="wc-predict-tdee">TDEE: <b>{wpResult.tdee} kcal</b></div>
               </div>
