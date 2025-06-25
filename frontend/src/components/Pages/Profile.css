@@ -1,95 +1,106 @@
-/* Profile page styles for user info form and card */
+/* Profile Page - Dark Mode Revamp */
 .profile-container {
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 32px 16px;
+  background: #181c24;
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 16px #0006;
 }
 .profile-title {
   font-size: 2rem;
   font-weight: 700;
-  color: #2563eb;
+  color: #22d3ee;
   margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 16px #000a;
 }
 .profile-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background: #f8fafc;
+  background: linear-gradient(135deg, #23283a 60%, #181c24 100%);
   border-radius: 1.25rem;
   padding: 2rem 1.5rem;
-  box-shadow: 0 2px 8px rgba(30,41,59,0.06);
+  box-shadow: 0 2px 8px #0006;
+  border: 1.5px solid #23283a;
 }
 .profile-form input, .profile-form select {
   padding: 0.75rem 1rem;
   border-radius: 0.75rem;
-  border: 1px solid #cbd5e1;
-  font-size: 1rem;
-  background: #fff;
-  color: #0f172a;
+  border: 1.5px solid #23283a;
+  font-size: 1.08rem;
+  background: #181c24;
+  color: #e5e7eb;
   outline: none;
-  transition: border 0.2s;
+  transition: border 0.2s, box-shadow 0.18s;
+  box-shadow: 0 2px 8px #0002;
 }
 .profile-form input:focus, .profile-form select:focus {
-  border: 1.5px solid #2563eb;
+  border: 1.5px solid #22d3ee;
+  box-shadow: 0 0 0 2px #22d3ee44;
 }
 .profile-form button {
   padding: 0.75rem 1.1rem;
   border-radius: 0.75rem;
   border: none;
-  background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
+  background: linear-gradient(90deg, #2563eb 0%, #9333ea 100%);
   color: #fff;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 700;
+  font-size: 1.08rem;
   cursor: pointer;
   margin-top: 0.25rem;
   transition: background 0.2s, opacity 0.2s;
+  box-shadow: 0 2px 16px #0004;
 }
 .profile-cancel {
-  background: #e2e8f0;
-  color: #334155;
+  background: #23283a;
+  color: #b0b8c1;
   margin-left: 0.5rem;
 }
 .profile-error {
-  color: #dc2626;
+  color: #f87171;
   font-size: 0.98rem;
   margin-bottom: 0.5rem;
   text-align: center;
 }
 .profile-success {
-  color: #059669;
+  color: #34d399;
   font-size: 1rem;
   margin-bottom: 0.5rem;
   text-align: center;
 }
 .profile-loading {
-  color: #2563eb;
+  color: #22d3ee;
   text-align: center;
   margin-top: 1.5rem;
 }
 .profile-info-card {
-  background: #f8fafc;
+  background: linear-gradient(135deg, #23283a 60%, #181c24 100%);
   border-radius: 1.25rem;
   padding: 2rem 1.5rem;
-  box-shadow: 0 2px 8px rgba(30,41,59,0.06);
+  box-shadow: 0 2px 8px #0006;
   font-size: 1.1rem;
-  color: #0f172a;
+  color: #e5e7eb;
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
+  border: 1.5px solid #23283a;
 }
 .profile-edit-btn {
   margin-top: 1.2rem;
   padding: 0.7rem 1.2rem;
   border-radius: 0.75rem;
   border: none;
-  background: linear-gradient(90deg, #38bdf8 0%, #2563eb 100%);
+  background: linear-gradient(90deg, #9333ea 0%, #2563eb 100%);
   color: #fff;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 700;
+  font-size: 1.08rem;
   cursor: pointer;
   transition: background 0.2s, opacity 0.2s;
+  box-shadow: 0 2px 16px #0004;
 }
 .profile-edit-btn:hover {
-  background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
+  background: linear-gradient(90deg, #2563eb 0%, #9333ea 100%);
   opacity: 0.92;
 }

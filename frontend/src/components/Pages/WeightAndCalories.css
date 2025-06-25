@@ -1,16 +1,19 @@
+/* App Page Container - Dark Mode */
 .app-page-container {
   max-width: 1100px;
   margin: 0 auto;
-  background: #fff;
+  background: linear-gradient(135deg, #23283a 60%, #181c24 100%);
   border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 16px #0006;
   padding: 32px 24px 40px 24px;
+  color: #e5e7eb;
+  border: 1px solid #23283a;
 }
-.app-page-title {
-  font-size: 2.2rem;
+.app-page-title, .analytics-section-title, .wc-section-title, .wc-info-box h2 {
+  color: #22d3ee !important;
+  text-shadow: 0 2px 16px #000a !important;
   font-weight: 700;
-  margin-bottom: 18px;
-  color: #2d3748;
+  letter-spacing: 1px;
 }
 .wc-flex {
   display: flex;
@@ -19,17 +22,19 @@
 }
 .wc-card {
   flex: 1 1 400px;
-  background: #f7fafc;
+  background: linear-gradient(135deg, #23283a 60%, #181c24 100%);
   border-radius: 12px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  box-shadow: 0 1px 6px #0004;
   padding: 24px 20px 20px 20px;
   margin-bottom: 24px;
+  color: #e5e7eb;
+  border: 1.5px solid #23283a;
 }
 .wc-card h2 {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 16px;
-  color: #2b6cb0;
+  color: #22d3ee;
 }
 .wc-form {
   display: flex;
@@ -39,51 +44,68 @@
 }
 .wc-form label {
   font-weight: 500;
-  color: #4a5568;
+  color: #b0b8c1;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-.wc-form input, .wc-form select {
-  padding: 7px 8px;
-  border-radius: 5px;
-  border: 1px solid #cbd5e1;
-  font-size: 1rem;
+.wc-form input,
+.wc-form select,
+.wc-form textarea {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #23283a;
+  font-size: 1.08rem;
   margin-top: 2px;
+  background: #181c24;
+  color: #e5e7eb;
+  box-shadow: 0 2px 8px #0002;
+  transition: border 0.18s, box-shadow 0.18s;
+}
+.wc-form input:focus,
+.wc-form select:focus,
+.wc-form textarea:focus {
+  outline: none;
+  border: 1.5px solid #22d3ee;
+  box-shadow: 0 0 0 2px #22d3ee44;
 }
 .wc-form button {
-  background: #3182ce;
+  background: linear-gradient(90deg, #2563eb 0%, #9333ea 100%);
   color: #fff;
   border: none;
-  border-radius: 6px;
-  padding: 10px 0;
-  font-size: 1rem;
+  border-radius: 8px;
+  padding: 12px 0;
+  font-size: 1.08rem;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
+  box-shadow: 0 2px 16px #0004;
+  margin-top: 10px;
 }
 .wc-form button:disabled {
-  background: #a0aec0;
+  background: #23283a;
+  color: #b0b8c1;
   cursor: not-allowed;
 }
 .error-message {
-  color: #e53e3e;
-  background: #fff5f5;
-  border: 1px solid #fed7d7;
+  color: #f87171;
+  background: #3b1e1e;
+  border: 1px solid #f87171;
   border-radius: 6px;
   padding: 10px 16px;
   margin-bottom: 18px;
 }
 .wc-result {
-  background: #e6fffa;
+  background: linear-gradient(135deg, #23283a 60%, #181c24 100%);
   border-radius: 8px;
   padding: 14px 12px;
   margin-top: 12px;
-  color: #234e52;
+  color: #e5e7eb;
+  box-shadow: 0 1px 4px #0004;
 }
 .wc-result h3, .wc-result h4 {
   margin: 0 0 8px 0;
-  color: #285e61;
+  color: #22d3ee;
 }
 .wc-result ul {
   margin: 0 0 8px 18px;
@@ -184,7 +206,7 @@
 .wc-weekly-heading {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #2b6cb0;
+  color: #22d3ee;
   margin: 18px 0 8px 0;
   letter-spacing: 1px;
   text-align: center;
@@ -196,37 +218,39 @@
   list-style: none;
 }
 .wc-weekly-list li {
-  background: #f7fafc;
+  background: #23283a;
   border-radius: 6px;
   margin-bottom: 7px;
   padding: 8px 14px;
-  color: #234e52;
+  color: #b0b8c1;
   font-size: 1.05rem;
-  box-shadow: 0 1px 4px rgba(44, 130, 201, 0.07);
+  box-shadow: 0 1px 4px #0004;
 }
 .wc-main-bg {
-  background: linear-gradient(120deg, #f0f4f8 0%, #e6fffa 100%);
+  background: linear-gradient(120deg, #181c24 0%, #23283a 100%);
   min-height: 100vh;
 }
 .wc-info-box {
-  background: #f7fafc;
-  border-left: 5px solid #3182ce;
+  background: linear-gradient(135deg, #23283a 60%, #181c24 100%);
+  border-left: 5px solid #22d3ee;
   border-radius: 10px;
   padding: 22px 28px 18px 28px;
   margin-bottom: 32px;
-  box-shadow: 0 2px 12px rgba(44,130,201,0.07);
+  box-shadow: 0 2px 12px #0006;
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+  color: #e5e7eb;
 }
 .wc-info-box h2 {
-  color: #2b6cb0;
+  color: #22d3ee;
   font-size: 1.45rem;
   font-weight: 700;
   margin-bottom: 7px;
+  letter-spacing: 0.5px;
 }
 .wc-info-box p {
-  color: #234e52;
+  color: #b0b8c1;
   font-size: 1.08rem;
   margin: 0;
 }

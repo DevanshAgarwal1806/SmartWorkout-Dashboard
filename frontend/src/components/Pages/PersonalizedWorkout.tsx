@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import './WeightAndCalories.css';
+import './PersonalizedWorkout.css';
 import type { UserProfile } from '../../Services/profileService';
 import {
   fetchPersonalizedWorkouts,
@@ -21,10 +21,10 @@ const Modal = React.memo<{ open: boolean; onClose: () => void; children: React.R
   if (!open) return null;
   return (
     <>
-      <div className="wc-modal-blur"><div className="wc-modal-blur-effect" /></div>
-      <div className="wc-modal-overlay" onClick={onClose}>
-        <div className="wc-modal-content" onClick={e => e.stopPropagation()}>
-          <button className="wc-modal-close" onClick={onClose}>&times;</button>
+      <div className="pw-modal-blur"><div className="pw-modal-blur-effect" /></div>
+      <div className="pw-modal-overlay" onClick={onClose}>
+        <div className="pw-modal-content" onClick={e => e.stopPropagation()}>
+          <button className="pw-modal-close" onClick={onClose}>&times;</button>
           {children}
         </div>
       </div>
@@ -215,19 +215,19 @@ const PersonalizedWorkout: React.FC<PersonalizedWorkoutProps> = ({ profile }) =>
   // Show all saved plans
   if (step === 0) {
     return (
-      <div className="wc-main-bg">
-        <div className="wc-info-box">
-          <h2>Personalized Workout Plan</h2>
+      <div className="pw-container">
+        <div className="pw-section">
+          <h2 className="pw-title">Personalized Workout Plan</h2>
           <p>Get a daily, AI-powered workout plan tailored to your goals, schedule, and preferences. Enter your details below for a stunning, actionable plan!</p>
         </div>
-        <div className="wc-choice-card">
-          <h2>Create a new Personalized Workout Plan</h2>
-          <button onClick={() => setStep(1)} disabled={!isProfileComplete(profile)}>Use my profile data</button>
-          <button onClick={() => setStep(2)}>Enter new data</button>
-          {!isProfileComplete(profile) && <div style={{color: 'red', marginTop: 8}}>Profile incomplete. Please fill your profile for best results.</div>}
+        <div className="pw-section" style={{maxWidth: 500, margin: '0 auto'}}>
+          <h2 className="pw-section-title">Create a new Personalized Workout Plan</h2>
+          <button className="pw-form-btn" onClick={() => setStep(1)} disabled={!isProfileComplete(profile)} style={{marginBottom: '1rem'}}>Use my profile data</button>
+          <button className="pw-form-btn" onClick={() => setStep(2)}>Enter new data</button>
+          {!isProfileComplete(profile) && <div style={{color: 'var(--accent-color, #38bdf8)', marginTop: 8}}>Profile incomplete. Please fill your profile for best results.</div>}
         </div>
-        <div className="wc-card" style={{marginTop: 32, maxWidth: 600, marginLeft: 'auto', marginRight: 'auto', boxShadow: '0 2px 16px rgba(30,41,59,0.08)', background: '#fff', borderRadius: 16, padding: '24px 18px'}}>
-          <h2 className="wc-section-title" style={{textAlign:'center',marginBottom:18}}>Your Saved Workout Plans</h2>
+        <div className="pw-section" style={{marginTop: 32, maxWidth: 600, marginLeft: 'auto', marginRight: 'auto'}}>
+          <h2 className="pw-section-title" style={{textAlign:'center',marginBottom:18}}>Your Saved Workout Plans</h2>
           {plansLoading ? (
             <div style={{textAlign:'center'}}>Loading...</div>
           ) : plans.length === 0 ? (
@@ -235,12 +235,12 @@ const PersonalizedWorkout: React.FC<PersonalizedWorkoutProps> = ({ profile }) =>
           ) : (
             <div style={{display:'flex', flexDirection:'column', gap:16, alignItems:'center'}}>
               {plans.map(plan => (
-                <div key={plan.id} className="wc-plan-list-item" style={{display:'flex',alignItems:'center',justifyContent:'space-between',background:'#f7fafc',borderRadius:10,padding:'14px 22px',marginBottom:0, minWidth:320, maxWidth:420, width:'100%', boxShadow:'0 1px 6px rgba(30,41,59,0.04)'}}>
+                <div key={plan.id} className="pw-plan-card" style={{display:'flex',alignItems:'center',justifyContent:'space-between',minWidth:320, maxWidth:420, width:'100%'}}>
                   <div style={{flex:1, cursor:'pointer'}} onClick={() => handlePlanModalOpen(plan)}>
-                    <b style={{fontSize:'1.08rem'}}>{plan.name}</b>
-                    <div style={{fontSize:'0.95rem',color:'#555'}}>{new Date(plan.created_at).toLocaleString()}</div>
+                    <b className="pw-plan-title">{plan.name}</b>
+                    <div className="pw-plan-meta">{new Date(plan.created_at).toLocaleString()}</div>
                   </div>
-                  <button style={{marginLeft:12,background:'#e53e3e',color:'#fff',border:'none',borderRadius:6,padding:'6px 12px',cursor:'pointer'}} onClick={()=>handleDeletePlan(plan.id)}>Delete</button>
+                  <button className="pw-plan-delete" onClick={()=>handleDeletePlan(plan.id)}>Delete</button>
                 </div>
               ))}
             </div>
@@ -248,8 +248,8 @@ const PersonalizedWorkout: React.FC<PersonalizedWorkoutProps> = ({ profile }) =>
         </div>
         <Modal open={planModal.open && !!planModal.plan} onClose={handlePlanModalClose}>
           {planModal.plan && (
-            <div className="wc-result-modal wc-calories-modal">
-              <div className="wc-modal-heading" style={{fontSize:'1.25rem'}}>{planModal.plan.name}</div>
+            <div className="pw-section">
+              <div className="pw-plan-title" style={{fontSize:'1.25rem'}}>{planModal.plan.name}</div>
               <pre style={{whiteSpace:'pre-wrap',fontSize:'1.08rem',background:'none',border:'none',margin:0}}>{planModal.plan.plan}</pre>
             </div>
           )}
@@ -259,25 +259,25 @@ const PersonalizedWorkout: React.FC<PersonalizedWorkoutProps> = ({ profile }) =>
   }
 
   return (
-    <div className="wc-main-bg">
-      <div className="wc-info-box">
-        <h2>Personalized Workout Plan</h2>
+    <div className="pw-container">
+      <div className="pw-section">
+        <h2 className="pw-title">Personalized Workout Plan</h2>
         <p>Get a daily, AI-powered workout plan tailored to your goals, schedule, and preferences. Enter your details below for a stunning, actionable plan!</p>
       </div>
-      <div className="wc-flex wc-flex-responsive" style={{justifyContent: 'center'}}>
-        <div className="wc-card wc-card-predict wc-card-predict-wide">
-          <h2 className="wc-section-title">Build Your Plan</h2>
-          <form onSubmit={handleSubmit} className="wc-form wc-form-predict wc-form-grid">
-            <div className="wc-form-col">
-              <label>Current Weight (kg): <input name="current_weight" type="number" min="30" max="250" value={form.current_weight} onChange={handleChange} required readOnly={step === 1} disabled={step === 1} className={step === 1 ? 'wc-prefill-input' : ''} /></label>
+      <div className="pw-section" style={{maxWidth: 900, margin: '0 auto'}}>
+        <h2 className="pw-section-title">Build Your Plan</h2>
+        <form onSubmit={handleSubmit} className="pw-form">
+          <div className="pw-form-cols">
+            <div className="pw-form-col">
+              <label>Current Weight (kg): <input name="current_weight" type="number" min="30" max="250" value={form.current_weight} onChange={handleChange} required readOnly={step === 1} disabled={step === 1} className={step === 1 ? 'pw-prefill-input' : ''} /></label>
               <label>Target Weight (kg): <input name="target_weight" type="number" min="30" max="250" value={form.target_weight} onChange={handleChange} required /></label>
               <label>Gender:
-                <select name="gender" value={form.gender} onChange={handleChange} required disabled={step === 1} className={step === 1 ? 'wc-prefill-input' : ''}>
+                <select name="gender" value={form.gender} onChange={handleChange} required disabled={step === 1} className={step === 1 ? 'pw-prefill-input' : ''}>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
               </label>
-              <label>Age: <input name="age" type="number" min="10" max="100" value={form.age} onChange={handleChange} required readOnly={step === 1} disabled={step === 1} className={step === 1 ? 'wc-prefill-input' : ''} /></label>
+              <label>Age: <input name="age" type="number" min="10" max="100" value={form.age} onChange={handleChange} required readOnly={step === 1} disabled={step === 1} className={step === 1 ? 'pw-prefill-input' : ''} /></label>
               <label>Target No. of Days: <input name="days" type="number" min="7" max="365" value={form.days} onChange={handleChange} required /></label>
               <label>Time You Can Dedicate Each Day (mins): <input name="exercise_hours" type="number" min="10" max="180" value={form.exercise_hours} onChange={handleChange} required /></label>
               <label>Gym Access:
@@ -287,7 +287,7 @@ const PersonalizedWorkout: React.FC<PersonalizedWorkoutProps> = ({ profile }) =>
                 </select>
               </label>
             </div>
-            <div className="wc-form-col">
+            <div className="pw-form-col">
               <label>Workout Days per Week: <input name="days_per_week" type="number" min="1" max="7" value={form.days_per_week} onChange={handleChange} required /></label>
               <label>Preferred Workout Type:
                 <select name="workout_type" value={form.workout_type} onChange={handleChange} required>
@@ -304,44 +304,36 @@ const PersonalizedWorkout: React.FC<PersonalizedWorkoutProps> = ({ profile }) =>
               <label>Limitations / Injuries (optional):
                 <textarea name="injuries" value={form.injuries} onChange={handleChange} rows={2} placeholder="e.g. knee pain, asthma, etc." style={{resize:'vertical'}} />
               </label>
-              <button type="submit" disabled={loading}>{loading ? 'Generating...' : 'Generate Plan'}</button>
+              <button className="pw-form-btn" type="submit" disabled={loading}>{loading ? 'Generating...' : 'Generate Plan'}</button>
             </div>
-          </form>
-          {error && <div className="error-message">{error}</div>}
-          
-          {/* Save plan modal - Fixed to prevent flickering */}
-          <Modal open={saveModal} onClose={handleSaveModalClose}>
-            <div className="wc-result-modal wc-calories-modal">
-              <div className="wc-modal-heading" style={{fontSize:'1.15rem',marginBottom:10}}>Save Your Workout Plan</div>
-              <input
-                type="text"
-                placeholder="Enter a name for your plan"
-                value={planName}
-                onChange={e=>setPlanName(e.target.value)}
-                style={{width:'100%',padding:'10px',borderRadius:6,border:'1px solid #cbd5e1',marginBottom:10}}
-                autoFocus
-              />
-              <button 
-                style={{width:'100%',background:'#2563eb',color:'#fff',border:'none',borderRadius:6,padding:'10px',fontWeight:600,marginBottom:8}} 
-                onClick={handleSavePlan} 
-                disabled={saveLoading}
-              >
-                {saveLoading ? 'Saving...' : 'Save Plan'}
-              </button>
-              {saveError && <div className="error-message">{saveError}</div>}
-              <div style={{marginTop:10}}><b>Preview:</b></div>
-              <pre style={{whiteSpace:'pre-wrap',fontSize:'1.08rem',background:'none',border:'none',margin:0,maxHeight:200,overflow:'auto'}}>{result}</pre>
-            </div>
-          </Modal>
-          
-          {/* View generated plan modal (legacy, not used anymore) */}
-          <Modal open={modalOpen && !!result} onClose={handleMainModalClose}>
-            <div className="wc-result-modal wc-calories-modal">
-              <div className="wc-modal-heading" style={{fontSize: '1.25rem'}}>Your Personalized Workout Plan</div>
-              <pre style={{whiteSpace: 'pre-wrap', fontSize: '1.08rem', background: 'none', border: 'none', margin: 0}}>{result}</pre>
-            </div>
-          </Modal>
-        </div>
+          </div>
+        </form>
+        {error && <div className="pw-error-message">{error}</div>}
+        <Modal open={saveModal} onClose={handleSaveModalClose}>
+          <div className="pw-section">
+            <div className="pw-plan-title" style={{fontSize:'1.15rem',marginBottom:10}}>Save Your Workout Plan</div>
+            <input
+              type="text"
+              placeholder="Enter a name for your plan"
+              value={planName}
+              onChange={e=>setPlanName(e.target.value)}
+              className="pw-form-input"
+              autoFocus
+            />
+            <button className="pw-form-btn" style={{width:'100%',marginBottom:8}} onClick={handleSavePlan} disabled={saveLoading}>
+              {saveLoading ? 'Saving...' : 'Save Plan'}
+            </button>
+            {saveError && <div className="pw-error-message">{saveError}</div>}
+            <div style={{marginTop:10}}><b>Preview:</b></div>
+            <pre style={{whiteSpace:'pre-wrap',fontSize:'1.08rem',background:'none',border:'none',margin:0,maxHeight:200,overflow:'auto'}}>{result}</pre>
+          </div>
+        </Modal>
+        <Modal open={modalOpen && !!result} onClose={handleMainModalClose}>
+          <div className="pw-section">
+            <div className="pw-plan-title" style={{fontSize: '1.25rem'}}>Your Personalized Workout Plan</div>
+            <pre style={{whiteSpace: 'pre-wrap', fontSize: '1.08rem', background: 'none', border: 'none', margin: 0}}>{result}</pre>
+          </div>
+        </Modal>
       </div>
     </div>
   );

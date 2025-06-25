@@ -24,21 +24,21 @@ const Navbar: React.FC = () => {
     { name: 'Workouts', href: '/workouts', icon: Dumbbell },
     { name: 'Analytics', href: '/analytics', icon: BarChart3 },
     { name: 'AI Coach', href: '/ai', icon: Brain },
-    { name: 'Weight & Calories', href: '/weight-calories', icon: Calculator },
+    { name: 'Body Metrics', href: '/weight-calories', icon: Calculator },
     { name: 'Personalized Workout', href: '/personalized-workout', icon: Dumbbell },
     { name: 'Set Goals', href: '/goals', icon: Flag },
     { name: 'Profile', href: '/profile', icon: User },
   ];
 
   return (
-    <nav className="navbar">
+    <nav className="navbar navbar-fullwidth">
       <div className="navbar-container">
         <div className="navbar-content">
           {/* Logo and brand */}
           <div className="navbar-brand">
             <div className="navbar-logo">
-              <Dumbbell className="navbar-logo-icon" />
-              <span className="navbar-logo-text">FitTrack</span>
+              <Dumbbell className="navbar-logo-icon" style={{ marginRight: '0.3rem' }} />
+              <span className="navbar-logo-text" style={{ marginLeft: '0.2rem' }}>FitTrack</span>
             </div>
           </div>
 

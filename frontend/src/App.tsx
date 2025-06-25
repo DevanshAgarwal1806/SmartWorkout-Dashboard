@@ -11,6 +11,7 @@ import Workouts from './components/Pages/Workouts';
 import Login from './components/Pages/Login';
 import Profile from './components/Pages/Profile';
 import Goals from './components/Pages/Goals';
+import Landing from './components/Pages/Landing';
 import { supabase } from './supabaseClient';
 import { getUserProfile } from './Services/profileService';
 import type { UserProfile } from './Services/profileService';
@@ -19,7 +20,6 @@ import './App.css';
 function App() {
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [profileLoading, setProfileLoading] = useState(true);
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
 
   useEffect(() => {
@@ -35,7 +35,6 @@ function App() {
   useEffect(() => {
     async function fetchProfile() {
       if (user) {
-        setProfileLoading(true);
         try {
           const data = await getUserProfile();
           setProfile(data);
@@ -43,12 +42,10 @@ function App() {
           console.error('Error fetching profile:', error);
           setProfile(null);
         } finally {
-          setProfileLoading(false);
           setInitialLoadComplete(true);
         }
       } else {
         setProfile(null);
-        setProfileLoading(false);
         setInitialLoadComplete(true);
       }
     }
@@ -62,15 +59,29 @@ function App() {
   };
 
   if (!user) {
-    return <Login onLogin={setUser} />;
+    return (
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login onLogin={setUser} />} />
+        <Route path="*" element={<Landing />} />
+      </Routes>
+    );
   }
 
   if (!initialLoadComplete) {
     return (
       <Layout>
         <div className="welcome-user-bar">
-          <span className="welcome-user">Welcome, {user.email}!</span>
-          <button className="logout-btn" onClick={handleLogout}>Logout</button>
+          <span className="welcome-user">
+            <span className="welcome-user-icon">
+              <svg width="22" height="22" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.38 8.38 0 0 1 13 0"/></svg>
+            </span>
+            Welcome, <span className="welcome-user-name">{profile && profile.name ? profile.name : user.email}</span>!
+          </span>
+          <button className="logout-btn" onClick={handleLogout} title="Logout">
+            <svg width="18" height="18" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" className="logout-btn-icon"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            <span className="logout-btn-text">Logout</span>
+          </button>
         </div>
         <div className="app-page-container">
           <p>Loading...</p>
@@ -82,8 +93,16 @@ function App() {
   return (
     <Layout>
       <div className="welcome-user-bar">
-        <span className="welcome-user">Welcome, {profile && profile.name ? profile.name : user.email}!</span>
-        <button className="logout-btn" onClick={handleLogout}>Logout</button>
+        <span className="welcome-user">
+          <span className="welcome-user-icon">
+            <svg width="22" height="22" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.38 8.38 0 0 1 13 0"/></svg>
+          </span>
+          Welcome, <span className="welcome-user-name">{profile && profile.name ? profile.name : user.email}</span>!
+        </span>
+        <button className="logout-btn" onClick={handleLogout} title="Logout">
+          <svg width="18" height="18" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" className="logout-btn-icon"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span className="logout-btn-text">Logout</span>
+        </button>
       </div>
       <Routes>
         <Route path="/" element={<Dashboard profile={profile} />} />

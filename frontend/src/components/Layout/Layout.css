@@ -1,12 +1,12 @@
-/* Layout Container */
+/* Layout Container - Dark Mode */
 .layout-container {
   min-height: 100vh;
-  background-color: #f9fafb;
+  background: #181c24;
 }
 
 /* Main Content */
 .layout-main {
-  max-width: 80rem;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
 }
@@ -28,22 +28,23 @@
 
 /* Content Container */
 .layout-content {
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  border: 1px solid #e5e7eb;
+  background: linear-gradient(135deg, #23283a 60%, #181c24 100%);
+  border-radius: 1rem;
+  box-shadow: 0 2px 16px #0006;
+  border: 1.5px solid #23283a;
   min-height: calc(100vh - 12rem);
+  color: #e5e7eb;
 }
 
 /* Footer */
 .layout-footer {
-  background-color: white;
-  border-top: 1px solid #e5e7eb;
+  background: #23283a;
+  border-top: 1px solid #23283a;
   margin-top: auto;
 }
 
 .layout-footer-content {
-  max-width: 80rem;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
 }
@@ -65,8 +66,8 @@
 
 .layout-footer-text {
   text-align: center;
-  color: #6b7280;
-  font-size: 0.875rem;
+  color: #b0b8c1;
+  font-size: 0.95rem;
 }
 
 .layout-footer-text p {

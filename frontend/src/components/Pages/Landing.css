@@ -1,0 +1,99 @@
+/* Modern, clean, and responsive landing page for SmartWorkout Dashboard */
+.landing-bg {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(120deg, #23283a 60%, #181c24 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.landing-hero {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem;
+}
+
+.landing-content {
+  background: rgba(24, 28, 36, 0.98);
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px #38bdf822, 0 2px 8px #23283a44;
+  padding: 3.5rem 2.5rem 3rem 2.5rem;
+  max-width: 480px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.2rem;
+}
+
+.landing-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #38bdf8;
+  letter-spacing: 1px;
+  margin-bottom: 0.7rem;
+  text-shadow: 0 2px 24px #2563eb55;
+}
+
+.landing-subtitle {
+  color: #e0e7ef;
+  font-size: 1.18rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  text-shadow: 0 1px 8px #000a;
+}
+
+.landing-get-started {
+  background: linear-gradient(90deg, #38bdf8 0%, #2563eb 100%);
+  color: #fff;
+  border: none;
+  border-radius: 1.2rem;
+  padding: 0.85rem 2.2rem;
+  font-size: 1.18rem;
+  font-weight: 700;
+  box-shadow: 0 2px 16px 0 #38bdf844;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+  margin-top: 1.2rem;
+}
+
+.landing-get-started:hover {
+  background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
+  color: #fff;
+  box-shadow: 0 0 24px 2px #38bdf8;
+}
+
+.landing-footer {
+  width: 100vw;
+  text-align: center;
+  color: #64748b;
+  font-size: 1rem;
+  padding: 2.5rem 0 1.2rem 0;
+  background: transparent;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 700px) {
+  .landing-hero {
+    padding: 0 0.5rem;
+  }
+  .landing-content {
+    padding: 2.2rem 1rem 2rem 1rem;
+    max-width: 98vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .landing-title {
+    font-size: 2rem;
+  }
+  .landing-content {
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+  }
+}
