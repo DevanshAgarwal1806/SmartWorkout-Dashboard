@@ -317,6 +317,33 @@
   font-size: 1.13rem;
   color: #234e52;
 }
+.wc-predict-weights-box {
+  background: #23283a;
+  border-radius: 0.7rem;
+  border: 1.5px solid #22d3ee;
+  padding: 1.1rem 1.2rem;
+  margin: 1.1rem 0 0.7rem 0;
+  color: #e0e7eb;
+  box-shadow: 0 2px 8px #23283a33;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  align-items: center;
+}
+.wc-predict-weights-box div {
+  font-size: 1.08rem;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.wc-predict-weights-box div span {
+  color: #e0e7eb;
+  font-weight: 400;
+}
+.wc-predict-weights-box .wc-predict-weights {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
 .wc-macros-list {
   margin: 0 0 12px 0;
   padding-left: 0;
@@ -459,29 +486,63 @@
   cursor: not-allowed !important;
 }
 .wc-predict-macros-box {
-  background: #23283a;
-  border-radius: 0.7rem;
-  border: 1.5px solid #22d3ee;
-  padding: 1.1rem 1.2rem;
-  margin: 1.1rem 0 0.7rem 0;
-  color: #e0e7eb;
-  box-shadow: 0 2px 8px #23283a33;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0.7rem;
+  justify-content: center;
+  margin: 1.1rem 0 0.7rem 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
 .wc-predict-macros-box ul {
+  display: flex;
+  flex-direction: row;
+  gap: 0.7rem;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 .wc-predict-macros-box li {
-  font-size: 1.08rem;
-  color: #38bdf8;
-  margin-bottom: 0.3rem;
-  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: inherit;
+  color: inherit;
+  font-weight: inherit;
 }
-.wc-predict-macros-box li span {
+.wc-predict-value-box {
+  background: #23283a;
+  border-radius: 0.6rem;
+  border: 1.5px solid #22d3ee;
+  color: #38bdf8;
+  font-weight: 600;
+  font-size: 1.08rem;
+  padding: 0.6rem 1.1rem;
+  margin: 0.3rem 0;
+  box-shadow: 0 1px 6px #23283a33;
+  display: inline-block;
+  min-width: 120px;
+  text-align: center;
+}
+.wc-predict-value-box span {
   color: #e0e7eb;
   font-weight: 400;
+}
+@media (max-width: 600px) {
+  .wc-predict-value-box {
+    min-width: 80px;
+    font-size: 0.98rem;
+    padding: 0.5rem 0.5rem;
+  }
+  .wc-predict-macros-box {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .wc-predict-macros-box ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }

@@ -228,16 +228,16 @@ const WeightAndCalories: React.FC<WeightAndCaloriesProps> = ({ profile }) => {
               <div className="wc-result-modal wc-predict-modal wc-calories-modal">
                 <div className="wc-predict-weights wc-calories-burnt" style={{flexDirection: 'column', alignItems: 'center', marginBottom: 0}}>
                   <div style={{fontSize: '2.1rem', fontWeight: 700, color: '#3182ce', marginBottom: 8}}>Predicted Weight</div>
-                  <div><span>1 Month:</span> <b>{wpResult.predictions["1_month"]} kg</b></div>
-                  <div><span>2 Months:</span> <b>{wpResult.predictions["2_months"]} kg</b></div>
-                  <div><span>6 Months:</span> <b>{wpResult.predictions["6_months"]} kg</b></div>
+                  <div className="wc-predict-value-box"><span>1 Month:</span> <b>{wpResult.predictions["1_month"]} kg</b></div>
+                  <div className="wc-predict-value-box"><span>2 Months:</span> <b>{wpResult.predictions["2_months"]} kg</b></div>
+                  <div className="wc-predict-value-box"><span>6 Months:</span> <b>{wpResult.predictions["6_months"]} kg</b></div>
                 </div>
                 <div className="wc-weekly-heading" style={{marginTop: 18}}>RECOMMENDED MACROS (PER DAY)</div>
                 <div className="wc-predict-macros-box">
                   <ul>
-                    <li>Protein: <span>{wpResult.macros.protein} g</span></li>
-                    <li>Fat: <span>{wpResult.macros.fat} g</span></li>
-                    <li>Carbs: <span>{wpResult.macros.carbs} g</span></li>
+                    <li className="wc-predict-value-box">Protein: <span>{wpResult.macros.protein} g</span></li>
+                    <li className="wc-predict-value-box">Fat: <span>{wpResult.macros.fat} g</span></li>
+                    <li className="wc-predict-value-box">Carbs: <span>{wpResult.macros.carbs} g</span></li>
                   </ul>
                 </div>
                 <div className="wc-predict-calories">Daily Calories: <b>{wpResult.daily_calories} kcal</b></div>
