@@ -175,3 +175,35 @@
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
+
+/* --- Responsive tweaks for AI Coach page --- */
+@media (max-width: 700px) {
+  .wc-info-box {
+    padding: 14px 8vw 12px 8vw;
+    font-size: 0.98rem;
+  }
+  .wc-card-ai {
+    min-width: 0;
+    max-width: 98vw;
+    padding: 18px 4vw 18px 4vw;
+  }
+  .ai-form label {
+    font-size: 0.98rem;
+  }
+  .ai-form button {
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+}
+@media (max-width: 480px) {
+  .wc-info-box {
+    padding: 10px 2vw 8px 2vw;
+    font-size: 0.95rem;
+  }
+  .wc-card-ai {
+    padding: 10px 2vw 10px 2vw;
+  }
+  .ai-form input[type="file"] {
+    font-size: 0.95rem;
+  }
+}

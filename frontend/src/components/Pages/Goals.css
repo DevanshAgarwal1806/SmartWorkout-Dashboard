@@ -89,3 +89,42 @@
   text-align: center;
   padding: 2rem 0;
 }
+
+/* --- Responsive tweaks for Goals page --- */
+@media (max-width: 600px) {
+  .goals-page {
+    padding: 1rem 2vw;
+    max-width: 99vw;
+  }
+  .goals-form {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .goals-input {
+    font-size: 0.98rem;
+    padding: 0.5rem 0.7rem;
+  }
+  .goals-add-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+  .goals-list-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .goals-list-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.7rem 0;
+  }
+}
+@media (max-width: 400px) {
+  .goals-page {
+    padding: 0.5rem 1vw;
+  }
+  .goals-input {
+    font-size: 0.95rem;
+  }
+}

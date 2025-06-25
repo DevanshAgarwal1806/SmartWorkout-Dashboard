@@ -1,6 +1,12 @@
 /* Dashboard Container */
 .dashboard-container {
-  padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2vw 2vw 3vw 2vw;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 /* Header Section */
@@ -75,7 +81,7 @@
 /* Stats Grid */
 .dashboard-stats-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -93,9 +99,14 @@
 }
 
 .dashboard-stat-card {
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  border: 1px solid #e5e7eb;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 16px rgba(30,41,59,0.08);
+  padding: 1.5rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
 }
 
 .dashboard-stat-content {
@@ -105,28 +116,20 @@
 }
 
 .dashboard-stat-title {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #6b7280;
-  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: #64748b;
+  margin-bottom: 0.5rem;
 }
 
 .dashboard-stat-value {
-  font-size: 1.5rem;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
   font-weight: 700;
-  color: #111827;
-  margin-top: 0.25rem;
-  margin-bottom: 0;
+  color: #2563eb;
 }
 
 .dashboard-stat-icon {
-  padding: 0.75rem;
-  border-radius: 0.5rem;
-}
-
-.dashboard-icon {
-  height: 1.5rem;
-  width: 1.5rem;
+  margin-top: 0.5rem;
+  font-size: 2rem;
 }
 
 /* Stat Card Color Variations */
@@ -168,9 +171,10 @@
 
 /* Activity Grid */
 .dashboard-activity-grid {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
+  justify-content: space-between;
 }
 
 @media (min-width: 1024px) {
@@ -180,24 +184,26 @@
 }
 
 .dashboard-section-card {
-  background-color: white;
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  border: 1px solid #e5e7eb;
+  flex: 1 1 320px;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 16px rgba(30,41,59,0.08);
+  padding: 1.5rem 1.2rem;
+  min-width: 0;
+  margin-bottom: 1.5rem;
 }
 
 .dashboard-section-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .dashboard-section-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #111827;
-  margin: 0;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  font-weight: 600;
+  color: #1e293b;
 }
 
 .dashboard-actions-title {
@@ -205,39 +211,43 @@
 }
 
 .dashboard-view-all-btn {
-  color: #2563eb;
-  font-size: 0.875rem;
-  font-weight: 500;
-  background: none;
+  background: #2563eb;
+  color: #fff;
   border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: color 0.2s ease-in-out;
+  transition: background 0.18s;
 }
 
 .dashboard-view-all-btn:hover {
-  color: #1d4ed8;
+  background: #1d4ed8;
 }
 
 /* Empty State */
 .dashboard-empty-state {
   text-align: center;
-  padding: 2rem 0;
+  color: #64748b;
+  margin-top: 2rem;
 }
 
 .dashboard-empty-icon {
-  height: 3rem;
-  width: 3rem;
-  color: #d1d5db;
-  margin: 0 auto 1rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-bottom: 8px;
+  color: #cbd5e1;
 }
 
 .dashboard-empty-title {
   color: #6b7280;
   margin: 0;
+  font-size: 1.1rem;
 }
 
 .dashboard-empty-subtitle {
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   color: #9ca3af;
   margin: 0;
 }
@@ -256,11 +266,15 @@
   padding: 1rem;
   background-color: #f9fafb;
   border-radius: 0.5rem;
+  box-shadow: 0 1px 6px rgba(30,41,59,0.04);
+  flex-wrap: wrap;
 }
 
 .dashboard-workout-content {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .dashboard-workout-icon {
@@ -278,14 +292,14 @@
 
 .dashboard-workout-date {
   font-weight: 500;
-  color: #111827;
-  margin: 0;
+  color: #2563eb;
+  margin: 0 1rem 0 0;
 }
 
 .dashboard-workout-stats {
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   color: #6b7280;
-  margin: 0;
+  margin: 0 1rem 0 0;
 }
 
 .dashboard-workout-trend {
@@ -306,10 +320,14 @@
   padding: 1rem;
   text-align: left;
   border-radius: 0.5rem;
-  border: 1px solid;
+  border: 1px solid #e5e7eb;
   background: none;
   cursor: pointer;
   transition: border-color 0.2s ease-in-out;
+}
+
+.dashboard-action-btn:hover {
+  border-color: #2563eb;
 }
 
 .dashboard-action-content {
@@ -425,5 +443,44 @@
   }
   50% {
     opacity: 0.5;
+  }
+}
+
+@media (max-width: 900px) {
+  .dashboard-container {
+    padding: 2vw 1vw 3vw 1vw;
+  }
+  .dashboard-activity-grid {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .dashboard-section-card {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-container {
+    padding: 2vw 0.5vw 3vw 0.5vw;
+  }
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .dashboard-section-card {
+    padding: 1rem 0.5rem;
+  }
+  .dashboard-workout-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.75rem 0.5rem;
+  }
+  .dashboard-workout-content {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .dashboard-section-title {
+    font-size: 1rem;
   }
 }

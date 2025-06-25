@@ -322,36 +322,25 @@
   gap: 14px;
 }
 @media (max-width: 900px) {
-  .wc-flex, .wc-flex-responsive {
-    flex-direction: column !important;
-    gap: 18px !important;
-    align-items: stretch !important;
+  .wc-main-bg {
+    padding: 12px 2vw;
   }
-  .wc-card, .wc-card-predict, .wc-card-calories, .wc-card-analytics, .wc-card-predict-wide {
-    min-width: 0 !important;
-    max-width: 98vw !important;
-    width: 100% !important;
-    margin: 0 0 24px 0 !important;
-    padding: 18px 4vw 18px 4vw !important;
+  .wc-flex {
+    flex-direction: column;
+    gap: 1.5rem;
   }
-  .wc-info-box {
-    max-width: 99vw !important;
-    padding: 16px 4vw 12px 4vw !important;
+  .wc-card {
+    margin-bottom: 1.5rem;
   }
-  .wc-form-grid {
-    grid-template-columns: 1fr !important;
-    gap: 0 !important;
+}
+@media (max-width: 700px) {
+  .wc-card-predict-wide {
+    max-width: 99vw;
+    padding: 14px 2vw 14px 2vw;
   }
-  .wc-form-col {
-    gap: 10px !important;
-  }
-  .wc-section-title, .app-page-title {
-    font-size: 1.1rem !important;
-  }
-  .wc-modal-content {
-    min-width: 0 !important;
-    max-width: 98vw !important;
-    padding: 18px 4vw 18px 4vw !important;
+  .wc-choice-card {
+    max-width: 99vw;
+    padding: 18px 4vw 14px 4vw;
   }
 }
 @media (max-width: 600px) {
@@ -364,10 +353,40 @@
   .wc-form input, .wc-form select, .wc-form textarea {
     font-size: 0.98rem !important;
     padding: 6px 6px !important;
+    border-radius: 0.6rem;
   }
   .wc-form button {
     font-size: 1rem !important;
     padding: 10px 0 !important;
+    border-radius: 0.6rem;
+  }
+  .wc-modal-content {
+    min-width: 0;
+    width: 98vw;
+    max-width: 98vw;
+    border-radius: 0.8rem;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+  }
+  .wc-modal-heading {
+    font-size: 1.05rem;
+  }
+  .wc-predict-modal, .wc-calories-modal {
+    padding-top: 0.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .wc-card-predict-wide {
+    padding: 8px 1vw 8px 1vw;
+  }
+  .wc-choice-card {
+    padding: 10px 2vw 8px 2vw;
+  }
+  .wc-form-predict label, .wc-form label {
+    font-size: 0.95rem;
+  }
+  .wc-form-predict button, .wc-form button {
+    font-size: 0.98rem;
+    padding: 8px 0;
   }
 }
 @keyframes wc-modal-fadein {

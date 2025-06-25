@@ -96,6 +96,16 @@
   text-align: center;
 }
 @media (max-width: 900px) {
+  .analytics-main-bg {
+    padding: 12px 2vw;
+  }
+  .analytics-flex {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .analytics-card {
+    margin-bottom: 1.5rem;
+  }
   .analytics-form {
     max-width: 99vw !important;
     padding: 1rem 4vw !important;
@@ -113,16 +123,41 @@
   }
 }
 @media (max-width: 600px) {
-  .analytics-form label {
-    font-size: 0.98rem !important;
+  .analytics-main-bg {
+    padding: 8px 1vw;
   }
-  .analytics-form input[type="file"],
-  .analytics-form select {
+  .analytics-flex {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .analytics-card {
+    padding: 1rem 0.5rem;
+    min-width: 0;
+    width: 100%;
+    border-radius: 0.8rem;
+    box-shadow: 0 1px 6px rgba(30,41,59,0.04);
+  }
+  .analytics-section-title, .app-page-title {
+    font-size: 1rem !important;
+  }
+  .analytics-form input, .analytics-form select, .analytics-form textarea {
     font-size: 0.98rem !important;
     padding: 6px 6px !important;
+    border-radius: 0.6rem;
   }
   .analytics-form button {
     font-size: 1rem !important;
     padding: 10px 0 !important;
+    border-radius: 0.6rem;
+  }
+  .analytics-modal-content {
+    min-width: 0;
+    width: 98vw;
+    max-width: 98vw;
+    border-radius: 0.8rem;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+  }
+  .analytics-modal-heading {
+    font-size: 1.05rem;
   }
 }
