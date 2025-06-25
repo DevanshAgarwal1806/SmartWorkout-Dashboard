@@ -178,3 +178,59 @@
     font-size: 0.95rem;
   }
 }
+.wc-modal-content, .wc-result-modal, .ai-insights-modal {
+  background: linear-gradient(135deg, #23283a 60%, #181c24 100%) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18) !important;
+  color: #e5e7eb !important;
+  padding: 32px 28px 24px 28px !important;
+  border: 1.5px solid #22d3ee !important;
+  max-width: 95vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.ai-insights-modal pre {
+  max-height: 55vh;
+  overflow-y: auto;
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #22d3ee #23283a;
+}
+
+.ai-insights-modal pre::-webkit-scrollbar {
+  width: 8px;
+}
+.ai-insights-modal pre::-webkit-scrollbar-thumb {
+  background: #22d3ee;
+  border-radius: 6px;
+}
+.ai-insights-modal pre::-webkit-scrollbar-track {
+  background: #23283a;
+  border-radius: 6px;
+}
+
+.wc-modal-heading {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  color: #22d3ee !important;
+  margin: 10px 0 18px 0 !important;
+  text-align: center !important;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 16px #000a;
+}
+
+/* Responsive tweaks for modal */
+@media (max-width: 600px) {
+  .wc-modal-content, .wc-result-modal, .ai-insights-modal {
+    min-width: 0 !important;
+    width: 98vw !important;
+    max-width: 98vw !important;
+    border-radius: 0.8rem !important;
+    padding: 1.2rem 0.5rem 1rem 0.5rem !important;
+  }
+  .wc-modal-heading {
+    font-size: 1.05rem !important;
+  }
+}

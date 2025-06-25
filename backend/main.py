@@ -53,7 +53,7 @@ class WeightPredictionRequest(BaseModel):
     weight_kg: float
     activity_level: str
     gender: str
-    goal_type: str  # "lose" or "gain"
+    goal_type: str  # "lose" only
 
 class CalorieCalculationRequest(BaseModel):
     gender: str
@@ -191,8 +191,9 @@ async def predict_weight(request: WeightPredictionRequest):
         weekly_kg = 0.5
         sign = -1
     else:
-        weekly_kg = 0.25
-        sign = 1
+        # If not 'lose', default to no weight change or raise error
+        weekly_kg = 0
+        sign = 0
     calories_per_kg = 7700
     daily_calorie_change = (weekly_kg * calories_per_kg) / 7
     def predict_weight_for_days(days):

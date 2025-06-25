@@ -28,7 +28,6 @@ const activityLevels = [
 ];
 const goalTypes = [
   { value: 'lose', label: 'Lose Weight' },
-  { value: 'gain', label: 'Gain Weight' },
 ];
 const exerciseTypes = [
   'Jogging',
