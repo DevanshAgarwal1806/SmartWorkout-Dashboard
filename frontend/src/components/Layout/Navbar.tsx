@@ -9,7 +9,8 @@ import {
   Menu,
   X,
   Calculator,
-  Flag
+  Flag,
+  Utensils
 } from 'lucide-react';
 import type { NavItem } from '../../types';
 import './Navbar.css';
@@ -26,7 +27,7 @@ const Navbar: React.FC = () => {
     { name: 'AI Coach', href: '/ai', icon: Brain },
     { name: 'Body Metrics', href: '/weight-calories', icon: Calculator },
     { name: 'Personalized Workout', href: '/personalized-workout', icon: Dumbbell },
-    { name: 'Diet Plan', href: '/diet-plan', icon: Calculator },
+    { name: 'Diet Plan', href: '/diet-plan', icon: Utensils },
     { name: 'Set Goals', href: '/goals', icon: Flag },
     { name: 'Profile', href: '/profile', icon: User },
   ];
@@ -49,6 +50,9 @@ const Navbar: React.FC = () => {
               const Icon = item.icon;
               const isActive = currentPath === item.href;
               
+              // Make Personalized Workout icon larger
+              const iconClass = item.name === 'Personalized Workout' ? 'navbar-item-icon navbar-item-icon-large' : 'navbar-item-icon';
+              
               return (
                 <Link
                   key={item.name}
@@ -56,7 +60,7 @@ const Navbar: React.FC = () => {
                   className={`navbar-item ${isActive ? 'navbar-item-active' : ''}`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <Icon className="navbar-item-icon" />
+                  <Icon className={iconClass} />
                   {item.name}
                 </Link>
               );
@@ -86,6 +90,9 @@ const Navbar: React.FC = () => {
                 const Icon = item.icon;
                 const isActive = currentPath === item.href;
                 
+                // Make Personalized Workout icon larger
+                const iconClass = item.name === 'Personalized Workout' ? 'navbar-mobile-item-icon navbar-item-icon-large' : 'navbar-mobile-item-icon';
+                
                 return (
                   <Link
                     key={item.name}
@@ -93,7 +100,7 @@ const Navbar: React.FC = () => {
                     className={`navbar-mobile-item ${isActive ? 'navbar-mobile-item-active' : ''}`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <Icon className="navbar-mobile-item-icon" />
+                    <Icon className={iconClass} />
                     {item.name}
                   </Link>
                 );

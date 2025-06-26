@@ -8,24 +8,25 @@
   top: 0;
   z-index: 100;
   width: 100vw;
-  min-width: 100vw;
+  min-width: 0;
   left: 0;
   right: 0;
   margin: 0;
   padding: 0;
-  /* Ensure navbar overlays the layout and stretches edge-to-edge */
   display: block;
+  overflow-x: hidden;
 }
 
 .navbar-container {
   width: 100vw;
-  min-width: 100vw;
+  min-width: 0;
   margin: 0;
   padding: 0 2rem;
   height: 4.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 @media (min-width: 1200px) {
@@ -40,6 +41,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 /* Responsive padding for navbar container */
@@ -167,6 +169,22 @@ body {
   align-items: center;
 }
 
+.navbar-item-icon {
+  width: 1.35em;
+  height: 1.35em;
+  margin-right: 0.7em;
+  vertical-align: middle;
+  transition: color 0.2s, filter 0.2s;
+}
+
+.navbar-item-icon-large {
+  width: 2.2em !important;
+  height: 2.2em !important;
+  margin-right: 0.7em;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 6px #38bdf8cc);
+}
+
 /* Mobile Menu Toggle */
 .navbar-mobile-toggle {
   display: flex;
@@ -266,4 +284,16 @@ body {
   height: 1.25rem;
   width: 1.25rem;
   margin-right: 0.75rem;
+  width: 1.35em;
+  height: 1.35em;
+  margin-right: 0.7em;
+  vertical-align: middle;
+  transition: color 0.2s, filter 0.2s;
+}
+
+/* Reuse large icon for mobile */
+.navbar-mobile-item-icon.navbar-item-icon-large {
+  width: 2.2em !important;
+  height: 2.2em !important;
+  filter: drop-shadow(0 0 6px #38bdf8cc);
 }

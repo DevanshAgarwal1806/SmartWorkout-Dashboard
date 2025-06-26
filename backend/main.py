@@ -406,20 +406,16 @@ async def generate_plot(file: UploadFile = File(...), plot_config: str = Form(No
     """Generate plot from uploaded data"""
     if not file.filename.endswith('.csv'):
         raise HTTPException(status_code=400, detail="Only CSV files are supported")
-    
     try:
         contents = await file.read()
         df = pd.read_csv(io.StringIO(contents.decode('utf-8')))
-        # Strip spaces from column names for robust matching
         df.columns = df.columns.str.strip()
-        # Parse plot configuration
         config = json.loads(plot_config) if plot_config else {}
         x_axis = config.get('x_axis')
         y_axis = config.get('y_axis')
         graph_type = config.get('graph_type', 'Line')
         legend_attr = config.get('legend_attr')
         stat_mode = config.get('stat_mode', 'Sum')
-        # Also strip spaces from incoming axis names
         if x_axis: x_axis = x_axis.strip()
         if y_axis: y_axis = y_axis.strip()
         if legend_attr: legend_attr = legend_attr.strip()
@@ -427,40 +423,47 @@ async def generate_plot(file: UploadFile = File(...), plot_config: str = Form(No
             raise HTTPException(status_code=400, detail="x_axis and y_axis are required")
         if x_axis not in df.columns or y_axis not in df.columns:
             raise HTTPException(status_code=400, detail=f"Invalid column names: x_axis='{x_axis}', y_axis='{y_axis}', available={list(df.columns)}")
-        
         plt.figure(figsize=(10, 6))
-        
+        # Helper for aggregation
+        def aggregate(grouped):
+            if stat_mode == "Sum":
+                return grouped.sum().reset_index()
+            elif stat_mode == "Mean":
+                return grouped.mean().reset_index()
+            elif stat_mode == "Median":
+                return grouped.median().reset_index()
+            else:
+                return grouped.sum().reset_index()
         if graph_type == "Line":
             if legend_attr and legend_attr in df.columns:
                 for val in df[legend_attr].unique():
                     subset = df[df[legend_attr] == val]
-                    plt.plot(subset[x_axis], subset[y_axis], label=str(val))
+                    grouped = subset.groupby(x_axis)[y_axis]
+                    agg = aggregate(grouped)
+                    plt.plot(agg[x_axis], agg[y_axis], label=str(val))
                 plt.legend(title=legend_attr)
             else:
-                plt.plot(df[x_axis], df[y_axis])
-        
+                grouped = df.groupby(x_axis)[y_axis]
+                agg = aggregate(grouped)
+                plt.plot(agg[x_axis], agg[y_axis])
         elif graph_type == "Scatter":
             if legend_attr and legend_attr in df.columns:
                 for val in df[legend_attr].unique():
                     subset = df[df[legend_attr] == val]
-                    plt.scatter(subset[x_axis], subset[y_axis], label=str(val))
+                    grouped = subset.groupby(x_axis)[y_axis]
+                    agg = aggregate(grouped)
+                    plt.scatter(agg[x_axis], agg[y_axis], label=str(val))
                 plt.legend(title=legend_attr)
             else:
-                plt.scatter(df[x_axis], df[y_axis])
-        
+                grouped = df.groupby(x_axis)[y_axis]
+                agg = aggregate(grouped)
+                plt.scatter(agg[x_axis], agg[y_axis])
         elif graph_type == "Bar":
             if df[x_axis].dtype == 'object' or df[x_axis].nunique() < 50:
                 if legend_attr and legend_attr in df.columns:
-                    # Group by x_axis and legend_attr, then plot grouped bars (robust)
                     grouped = df.groupby([x_axis, legend_attr])[y_axis]
-                    if stat_mode == "Sum":
-                        grouped = grouped.sum().reset_index()
-                    elif stat_mode == "Mean":
-                        grouped = grouped.mean().reset_index()
-                    elif stat_mode == "Median":
-                        grouped = grouped.median().reset_index()
-                    # Pivot to wide format for grouped bars
-                    pivot = grouped.pivot(index=x_axis, columns=legend_attr, values=y_axis).fillna(0)
+                    agg = aggregate(grouped)
+                    pivot = agg.pivot(index=x_axis, columns=legend_attr, values=y_axis).fillna(0)
                     x_vals = list(pivot.index)
                     legend_vals = list(pivot.columns)
                     x_indices = np.arange(len(x_vals))
@@ -472,13 +475,8 @@ async def generate_plot(file: UploadFile = File(...), plot_config: str = Form(No
                     plt.legend(title=legend_attr)
                 else:
                     grouped = df.groupby(x_axis)[y_axis]
-                    if stat_mode == "Sum":
-                        grouped = grouped.sum().reset_index()
-                    elif stat_mode == "Mean":
-                        grouped = grouped.mean().reset_index()
-                    elif stat_mode == "Median":
-                        grouped = grouped.median().reset_index()
-                    plt.bar(grouped[x_axis], grouped[y_axis])
+                    agg = aggregate(grouped)
+                    plt.bar(agg[x_axis], agg[y_axis])
                     plt.xticks(rotation=45)
             else:
                 raise HTTPException(status_code=400, detail="Bar chart requires categorical X-axis")
@@ -493,21 +491,16 @@ async def generate_plot(file: UploadFile = File(...), plot_config: str = Form(No
         elif graph_type == "Box":
             plt.boxplot(df[y_axis])
             plt.xticks([1], [y_axis])
-        
         plt.xlabel(x_axis)
         plt.ylabel(y_axis)
-        plt.title(f"{graph_type} Plot of {y_axis} vs {x_axis}")
+        plt.title(f"{graph_type} Plot of {y_axis} vs {x_axis} ({stat_mode})")
         plt.tight_layout()
-        
-        # Convert plot to base64 string
         buffer = BytesIO()
         plt.savefig(buffer, format='png', dpi=150, bbox_inches='tight')
         buffer.seek(0)
         plot_base64 = base64.b64encode(buffer.getvalue()).decode()
         plt.close()
-        
         return {"plot": f"data:image/png;base64,{plot_base64}"}
-        
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error generating plot: {str(e)}")
 

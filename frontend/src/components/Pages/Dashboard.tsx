@@ -243,7 +243,7 @@ const Dashboard: React.FC<{ profile?: UserProfile | null }> = ({ profile }) => {
                 </div>
               </div>
             </button>
-            <button className="dashboard-action-btn dashboard-action-green" onClick={() => navigate('/profile')}>
+            <button className="dashboard-action-btn dashboard-action-green" onClick={() => navigate('/goals')}>
               <div className="dashboard-action-content">
                 <Target className="dashboard-action-icon" />
                 <div className="dashboard-action-text">

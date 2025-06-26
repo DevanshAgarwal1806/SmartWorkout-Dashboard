@@ -10,6 +10,12 @@ const graphTypes = [
   'Box',
 ];
 
+const statModes = [
+  'Sum',
+  'Mean',
+  'Median',
+];
+
 const AnalyticsInfoBox: React.FC = () => (
   <div className="wc-info-box">
     <h2>Analytics Plotter</h2>
@@ -42,6 +48,7 @@ const Analytics: React.FC = () => {
   const [yAxis, setYAxis] = useState('');
   const [graphType, setGraphType] = useState('Line');
   const [legend, setLegend] = useState('');
+  const [statMode, setStatMode] = useState('Sum');
   const [plotUrl, setPlotUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -88,7 +95,7 @@ const Analytics: React.FC = () => {
     formData.append('file', file);
     formData.append(
       'plot_config',
-      JSON.stringify({ x_axis: xAxis, y_axis: yAxis, graph_type: graphType, legend_attr: legend })
+      JSON.stringify({ x_axis: xAxis, y_axis: yAxis, graph_type: graphType, legend_attr: legend, stat_mode: statMode })
     );
     try {
       setLoading(true);
@@ -146,6 +153,14 @@ const Analytics: React.FC = () => {
                   <select value={graphType} onChange={e => setGraphType(e.target.value)}>
                     {graphTypes.map(type => (
                       <option key={type} value={type}>{type}</option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  Statistic Mode:
+                  <select value={statMode} onChange={e => setStatMode(e.target.value)}>
+                    {statModes.map(mode => (
+                      <option key={mode} value={mode}>{mode}</option>
                     ))}
                   </select>
                 </label>
