@@ -7,7 +7,7 @@ import type { UserProfile } from '../../Services/profileService';
 const Profile: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [editMode, setEditMode] = useState(false);
-  const [form, setForm] = useState({ name: '', height_cm: '', weight_kg: '', age: '', gender: '' });
+  const [form, setForm] = useState({ name: '', height_cm: '', weight_kg: '', age: '', gender: '', allergies: '', medical_conditions: '' });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -36,7 +36,9 @@ const Profile: React.FC = () => {
           height_cm: data.height_cm.toString(),
           weight_kg: data.weight_kg.toString(),
           age: data.age.toString(),
-          gender: data.gender
+          gender: data.gender,
+          allergies: data.allergies || '',
+          medical_conditions: data.medical_conditions || ''
         });
       }
     } catch (e: any) {
@@ -65,7 +67,9 @@ const Profile: React.FC = () => {
         height_cm: Number(form.height_cm),
         weight_kg: Number(form.weight_kg),
         age: Number(form.age),
-        gender: form.gender
+        gender: form.gender,
+        allergies: form.allergies,
+        medical_conditions: form.medical_conditions
       });
       setSuccess('Profile saved!');
       setEditMode(false);
@@ -96,6 +100,8 @@ const Profile: React.FC = () => {
             <option value="Female">Female</option>
             <option value="Other">Other</option>
           </select>
+          <input name="allergies" type="text" placeholder="Allergies (optional)" value={form.allergies} onChange={handleChange} />
+          <input name="medical_conditions" type="text" placeholder="Medical Conditions (optional)" value={form.medical_conditions} onChange={handleChange} />
           <button type="submit">Save</button>
           {profile && <button type="button" className="profile-cancel" onClick={() => setEditMode(false)}>Cancel</button>}
         </form>
@@ -106,6 +112,8 @@ const Profile: React.FC = () => {
           <div><b>Weight:</b> {profile.weight_kg} kg</div>
           <div><b>Age:</b> {profile.age}</div>
           <div><b>Gender:</b> {profile.gender}</div>
+          {profile.allergies && <div><b>Allergies:</b> {profile.allergies}</div>}
+          {profile.medical_conditions && <div><b>Medical Conditions:</b> {profile.medical_conditions}</div>}
           <button className="profile-edit-btn" onClick={() => setEditMode(true)}>Edit</button>
         </div>
       )}

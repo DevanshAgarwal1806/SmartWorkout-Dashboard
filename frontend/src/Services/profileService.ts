@@ -8,6 +8,8 @@ export interface UserProfile {
   weight_kg: number;
   age: number;
   gender: string;
+  allergies?: string;
+  medical_conditions?: string;
   created_at: string;
 }
 

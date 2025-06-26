@@ -22,6 +22,7 @@ function App() {
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setUser(data.session?.user || null));
@@ -100,11 +101,27 @@ function App() {
           </span>
           Welcome, <span className="welcome-user-name">{profile && profile.name ? profile.name : user.email}</span>!
         </span>
-        <button className="logout-btn" onClick={handleLogout} title="Logout">
+        <button className="logout-btn" onClick={() => setShowLogoutModal(true)} title="Logout">
           <svg width="18" height="18" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" className="logout-btn-icon"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
           <span className="logout-btn-text">Logout</span>
         </button>
       </div>
+      {/* Logout confirmation modal */}
+      {showLogoutModal && (
+        <div className="pw-modal-blur"><div className="pw-modal-blur-effect" /></div>
+        )}
+      {showLogoutModal && (
+        <div className="pw-modal-overlay" onClick={() => setShowLogoutModal(false)}>
+          <div className="pw-modal-content" onClick={e => e.stopPropagation()} style={{minWidth:320, maxWidth:400}}>
+            <button className="pw-modal-close" onClick={() => setShowLogoutModal(false)}>&times;</button>
+            <div className="pw-section-title" style={{marginBottom:16}}>Are you sure you want to logout?</div>
+            <div style={{display:'flex', gap:12, justifyContent:'flex-end'}}>
+              <button className="pw-form-btn" style={{background:'#444'}} onClick={() => setShowLogoutModal(false)}>Cancel</button>
+              <button className="pw-form-btn" style={{background:'var(--accent-color,#38bdf8)'}} onClick={handleLogout}>Logout</button>
+            </div>
+          </div>
+        </div>
+      )}
       <Routes>
         <Route path="/" element={<Dashboard profile={profile} />} />
         <Route path="/workouts" element={<Workouts />} />
