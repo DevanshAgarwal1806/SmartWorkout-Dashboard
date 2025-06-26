@@ -113,39 +113,44 @@ body {
 .navbar-desktop {
   display: none;
   align-items: center;
-  gap: 2.2rem;
+  gap: 1.1rem; /* Reduced gap for more compact nav */
   height: 100%;
 }
 
 @media (min-width: 768px) {
   .navbar-desktop {
     display: flex;
+    gap: 1.1rem;
   }
 }
 
 .navbar-item {
   display: flex;
   align-items: center;
-  padding: 0.5rem 1.2rem;
-  border-radius: 0.5rem;
-  font-size: clamp(0.95rem, 2vw, 1.1rem);
-  font-weight: 600;
-  transition: all 0.2s;
+  gap: 0.35rem;
+  font-size: 0.98rem; /* Reduced font size */
+  padding: 0.45rem 0.7rem;
+  border-radius: 0.7rem;
+  color: #e0e7eb;
   background: none;
   border: none;
-  cursor: pointer;
-  color: #e5e7eb;
-  height: 100%;
-  margin: 0;
-  text-decoration: none !important;
-  -webkit-tap-highlight-color: transparent;
-  letter-spacing: 0.5px;
+  transition: background 0.18s, color 0.18s;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  min-width: 0;
+  max-width: 140px;
+  text-align: center;
+  text-decoration: none !important; /* Remove underline */
 }
 
 .navbar-item:hover {
   color: #22d3ee;
   background: #23283a;
   box-shadow: 0 2px 12px #22d3ee22;
+}
+
+.navbar-item:visited, .navbar-item:active, .navbar-item:focus {
+  text-decoration: none !important;
 }
 
 .navbar-item-active {
@@ -155,9 +160,9 @@ body {
 }
 
 .navbar-item-icon {
-  height: 1.1rem;
-  width: 1.1rem;
-  margin-right: 0.5rem;
+  height: 1.15rem;
+  width: 1.15rem;
+  margin-right: 0.18rem;
   display: flex;
   align-items: center;
 }

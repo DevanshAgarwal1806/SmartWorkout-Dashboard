@@ -26,6 +26,7 @@ const Navbar: React.FC = () => {
     { name: 'AI Coach', href: '/ai', icon: Brain },
     { name: 'Body Metrics', href: '/weight-calories', icon: Calculator },
     { name: 'Personalized Workout', href: '/personalized-workout', icon: Dumbbell },
+    { name: 'Diet Plan', href: '/diet-plan', icon: Calculator },
     { name: 'Set Goals', href: '/goals', icon: Flag },
     { name: 'Profile', href: '/profile', icon: User },
   ];

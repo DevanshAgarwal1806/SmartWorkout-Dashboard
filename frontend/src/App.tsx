@@ -12,6 +12,7 @@ import Login from './components/Pages/Login';
 import Profile from './components/Pages/Profile';
 import Goals from './components/Pages/Goals';
 import Landing from './components/Pages/Landing';
+import DietPlan from './components/Pages/DietPlan';
 import { supabase } from './supabaseClient';
 import { getUserProfile } from './Services/profileService';
 import type { UserProfile } from './Services/profileService';
@@ -113,6 +114,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/weight-calories" element={<WeightAndCalories profile={profile} />} />
         <Route path="/personalized-workout" element={<PersonalizedWorkout profile={profile} />} />
+        <Route path="/diet-plan" element={<DietPlan profile={profile} />} />
         <Route path="*" element={<Dashboard profile={profile} />} />
       </Routes>
     </Layout>

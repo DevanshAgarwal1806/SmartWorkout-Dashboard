@@ -94,6 +94,29 @@ class PersonalizedWorkoutRequest(BaseModel):
     gender: str
     age: int
 
+class DietPlanRequest(BaseModel):
+    name: str
+    age: int
+    gender: str  # "M", "F", "Other"
+    height_cm: int
+    weight_kg: float
+    goal_type: str  # "Weight Loss", "Muscle Gain", "Maintenance"
+    target_weight: Optional[float] = None
+    timeline_weeks: int
+    allergies: Optional[str] = ""
+    medical_conditions: Optional[str] = ""
+    diet_type: Optional[str] = ""  # "Vegan", "Vegetarian", "Keto", etc.
+    restrictions: Optional[str] = ""  # "Halal", "Kosher", etc.
+    meal_frequency: int = 3  # meals per day
+    disliked_foods: Optional[str] = ""
+    preferred_cuisines: Optional[str] = ""
+
+class DietPlanResponse(BaseModel):
+    success: bool
+    diet_plan: str
+    user_data: Dict[str, Any]
+    generated_at: str
+
 # In-memory storage (replace with database in production)
 workout_logs: List[WorkoutEntry] = []
 user_profiles: Dict[str, UserProfile] = {}
@@ -133,6 +156,65 @@ def generate_with_openrouter(prompt: str) -> str:
         return response.json()["choices"][0]["message"]["content"]
     except Exception as e:
         return f"❌ Error: {e}"
+def create_diet_plan_prompt(user_data: Dict[str, Any]) -> str:
+    """Create detailed prompt for diet plan generation"""
+    return f"""
+    You are a professional AI dietitian. Based on the following user details, generate a detailed personalized diet plan.
+
+    User Details:
+    - Name: {user_data.get('name', 'User')}
+    - Age: {user_data.get('age')} years
+    - Gender: {user_data.get('gender')}
+    - Height: {user_data.get('height_cm')} cm
+    - Weight: {user_data.get('weight_kg')} kg
+    - Fitness Goal: {user_data.get('goal_type')}
+    - Target Weight: {user_data.get('target_weight', 'Not specified')} kg
+    - Timeline: {user_data.get('timeline_weeks')} weeks
+    - Allergies: {user_data.get('allergies', 'None')}
+    - Medical Conditions: {user_data.get('medical_conditions', 'None')}
+    - Diet Preference: {user_data.get('diet_type', 'No specific preference')}
+    - Restrictions: {user_data.get('restrictions', 'None')}
+    - Meal Frequency: {user_data.get('meal_frequency')} meals per day
+    - Disliked Foods: {user_data.get('disliked_foods', 'None')}
+    - Preferred Cuisines: {user_data.get('preferred_cuisines', 'Any')}
+
+    Your output should include:
+    
+    1. **DAILY CALORIC AND MACRONUTRIENT TARGETS**
+       - Total daily calories needed
+       - Protein (grams and percentage)
+       - Carbohydrates (grams and percentage)
+       - Fats (grams and percentage)
+       - Fiber recommendations
+    
+    2. **SAMPLE DAILY MEAL PLAN**
+       - Breakfast with detailed portions
+       - Mid-morning snack (if applicable)
+       - Lunch with detailed portions
+       - Afternoon snack (if applicable)
+       - Dinner with detailed portions
+       - Evening snack (if applicable)
+    
+    3. **WEEKLY SHOPPING LIST**
+       - Categorized by food groups
+       - Estimated quantities needed
+    
+    4. **NUTRITIONAL WARNINGS AND TIPS**
+       - Important considerations based on medical conditions/allergies
+       - Hydration recommendations
+       - Supplement suggestions if needed
+    
+    5. **MEAL REPLACEMENT SUGGESTIONS**
+       - Alternative options for each meal
+       - Emergency meal ideas
+    
+    6. **PROGRESS TRACKING TIPS**
+       - How to monitor progress
+       - When to adjust the plan
+    
+    Present everything in a clear, organized format with emojis for better readability.
+    Make it motivating and personalized for {user_data.get('name', 'the user')}.
+    """
 
 @app.get("/")
 async def root():
@@ -141,37 +223,6 @@ async def root():
 @app.get("/api/health")
 async def health_check():
     return {"status": "healthy", "timestamp": datetime.now().isoformat()}
-
-# Workout Logging Endpoints
-# @app.post("/api/workouts")
-# async def log_workout(workout: WorkoutEntry):
-#     """Log a new workout"""
-#     workout_logs.append(workout)
-#     save_logs()
-#     return {"message": "Workout logged successfully", "workout": workout}
-
-# @app.get("/api/workouts")
-# async def get_workouts(limit: int = 10):
-#     """Get recent workouts"""
-#     return {"workouts": workout_logs[-limit:]}
-
-# @app.get("/api/workouts/streak")
-# async def get_workout_streak():
-#     """Calculate current workout streak"""
-#     if not workout_logs:
-#         return {"streak": 0}
-#     log_dates = sorted(set([datetime.strptime(log.date, "%Y-%m-%d").date() for log in workout_logs]))
-#     if not log_dates:
-#         return {"streak": 0}
-#     streak = 1
-#     for i in range(len(log_dates)-1, 0, -1):
-#         if (log_dates[i] - log_dates[i-1]).days == 1:
-#             streak += 1
-#         else:
-#             break
-#     return {"streak": streak}
-
-# Weight Prediction Endpoints
 @app.post("/api/predict-weight")
 async def predict_weight(request: WeightPredictionRequest):
     """Predict weight for 1, 2, and 6 months based on user data and goal"""
@@ -271,6 +322,58 @@ async def calculate_calories(request: CalorieCalculationRequest):
             "Sun: Rest"
         ]
     }
+
+# Diet plan generation endpoint
+@app.post("/api/generate-diet-plan", response_model=DietPlanResponse)
+async def generate_diet_plan(request: DietPlanRequest):
+    """
+    Generate a personalized diet plan based on user information
+    """
+    try:
+        # Convert request to dictionary for processing
+        user_data = {
+            "name": request.name,
+            "age": request.age,
+            "gender": request.gender,
+            "height_cm": request.height_cm,
+            "weight_kg": request.weight_kg,
+            "goal_type": request.goal_type,
+            "target_weight": request.target_weight,
+            "timeline_weeks": request.timeline_weeks,
+            "allergies": request.allergies,
+            "medical_conditions": request.medical_conditions,
+            "diet_type": request.diet_type,
+            "restrictions": request.restrictions,
+            "meal_frequency": request.meal_frequency,
+            "disliked_foods": request.disliked_foods,
+            "preferred_cuisines": request.preferred_cuisines
+        }
+        
+        # Validate required fields
+        if not all([request.name, request.age, request.height_cm, request.weight_kg, request.goal_type]):
+            raise HTTPException(status_code=400, detail="Missing required fields: name, age, height_cm, weight_kg, goal_type")
+        
+        # Generate diet plan using existing OpenRouter function
+        diet_plan_prompt = create_diet_plan_prompt(user_data)
+        diet_plan = generate_with_openrouter(diet_plan_prompt)
+        
+        if diet_plan.startswith("❌ Error"):
+            raise HTTPException(status_code=500, detail=diet_plan)
+        
+        # Store the diet plan request (optional - for analytics)
+        # You can save this to a database or file if needed
+        
+        return DietPlanResponse(
+            success=True,
+            diet_plan=diet_plan,
+            user_data=user_data,
+            generated_at=datetime.now().isoformat()
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to generate diet plan: {str(e)}")
 
 # Data Analysis Endpoints
 @app.post("/api/analyze-data")
@@ -582,114 +685,6 @@ Remember: You're not just giving them a workout list—you're their coach guidin
         return {"workout_plan": workout_plan}
     except Exception as e:
         return {"error": f"Error generating workout plan: {str(e)}"}
-
-# Route Tracking Endpoints
-# @app.post("/api/routes/calculate-distance")
-# async def calculate_route_distance(route_points: List[RoutePoint]):
-#     """Calculate total distance for a route"""
-#     if len(route_points) < 2:
-#         return {"distance_km": 0.0}
-    
-#     total_distance = 0.0
-#     for i in range(1, len(route_points)):
-#         point1 = (route_points[i-1].latitude, route_points[i-1].longitude)
-#         point2 = (route_points[i].latitude, route_points[i].longitude)
-#         total_distance += geodesic(point1, point2).kilometers
-    
-#     return {"distance_km": round(total_distance, 2)}
-
-# @app.post("/api/routes/{session_id}/add-point")
-# async def add_route_point(session_id: str, point: RoutePoint):
-#     """Add a point to an active route"""
-#     if session_id not in active_routes:
-#         active_routes[session_id] = []
-    
-#     active_routes[session_id].append(point)
-    
-#     # Calculate current distance
-#     points = active_routes[session_id]
-#     distance = 0.0
-#     if len(points) > 1:
-#         for i in range(1, len(points)):
-#             point1 = (points[i-1].latitude, points[i-1].longitude)
-#             point2 = (points[i].latitude, points[i].longitude)
-#             distance += geodesic(point1, point2).kilometers
-    
-#     return {
-#         "message": "Point added successfully",
-#         "total_points": len(points),
-#         "distance_km": round(distance, 2)
-#     }
-
-# @app.get("/api/routes/{session_id}")
-# async def get_route(session_id: str):
-#     """Get current route data"""
-#     if session_id not in active_routes:
-#         return {"points": [], "distance_km": 0.0}
-    
-#     points = active_routes[session_id]
-#     distance = 0.0
-#     if len(points) > 1:
-#         for i in range(1, len(points)):
-#             point1 = (points[i-1].latitude, points[i-1].longitude)
-#             point2 = (points[i].latitude, points[i].longitude)
-#             distance += geodesic(point1, point2).kilometers
-    
-#     return {
-#         "points": points,
-#         "distance_km": round(distance, 2)
-#     }
-
-# @app.delete("/api/routes/{session_id}")
-# async def clear_route(session_id: str):
-#     """Clear/end a route"""
-#     if session_id in active_routes:
-#         del active_routes[session_id]
-#     return {"message": "Route cleared successfully"}
-
-# # WebSocket for real-time route tracking
-# @app.websocket("/ws/route/{session_id}")
-# async def route_websocket_endpoint(websocket: WebSocket, session_id: str):
-#     await websocket.accept()
-    
-#     try:
-#         while True:
-#             data = await websocket.receive_json()
-            
-#             if data.get("type") == "location_update":
-#                 point = RoutePoint(
-#                     latitude=data["latitude"],
-#                     longitude=data["longitude"],
-#                     timestamp=data.get("timestamp", datetime.now().isoformat())
-#                 )
-                
-#                 if session_id not in active_routes:
-#                     active_routes[session_id] = []
-                
-#                 active_routes[session_id].append(point)
-                
-#                 # Calculate distance
-#                 points = active_routes[session_id]
-#                 distance = 0.0
-#                 if len(points) > 1:
-#                     point1 = (points[-2].latitude, points[-2].longitude)
-#                     point2 = (points[-1].latitude, points[-1].longitude)
-#                     segment_distance = geodesic(point1, point2).kilometers
-                    
-#                     # Calculate total distance
-#                     for i in range(1, len(points)):
-#                         p1 = (points[i-1].latitude, points[i-1].longitude)
-#                         p2 = (points[i].latitude, points[i].longitude)
-#                         distance += geodesic(p1, p2).kilometers
-                
-#                 await websocket.send_json({
-#                     "type": "distance_update",
-#                     "distance_km": round(distance, 2),
-#                     "total_points": len(points)
-#                 })
-                
-#     except WebSocketDisconnect:
-#         print(f"WebSocket disconnected for session {session_id}")
 
 if __name__ == "__main__":
     import uvicorn
