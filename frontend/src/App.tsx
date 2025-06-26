@@ -54,10 +54,16 @@ function App() {
     fetchProfile();
   }, [user]);
 
+  useEffect(() => {
+    // Reset logout modal when user changes (login/logout)
+    setShowLogoutModal(false);
+  }, [user]);
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setUser(null);
     setInitialLoadComplete(false); // Reset initial load state
+    setShowLogoutModal(false); // Ensure modal is closed on logout
   };
 
   if (!user) {
