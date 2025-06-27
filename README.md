@@ -85,7 +85,7 @@ cd WorkoutSmart
 ### 4. Start the App
 - **Backend:**
   ```sh
-  uvicorn main:app --reload
+  python main.py
   ```
 - **Frontend:**
   ```sh
@@ -93,16 +93,8 @@ cd WorkoutSmart
   npm run dev
   ```
 
-### 5. Supabase Setup
-- Run the provided SQL in the Supabase SQL Editor to create tables for workouts, user profiles, goals, and personalized workouts (with RLS policies).
-
----
-
 ## Deployment & Security
 - All secrets are stored in `.env` and are gitignored.
-- Never commit `.env` or any secret keys.
-- Use Supabase RLS for all user data tables.
-- For production, use HTTPS and secure your API endpoints.
 
 ---
 
@@ -111,10 +103,6 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 
 ---
 
-## License
-[MIT](LICENSE)
-
----
 
 ## Credits
 - Built with ❤️ by your team, powered by OpenRouter, Supabase, and the open-source community.
